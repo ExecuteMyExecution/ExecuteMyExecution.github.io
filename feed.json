@@ -7,6 +7,21 @@
     "home_page_url": "https://nocturne-tome.com",
     "items": [
         {
+            "id": "https://nocturne-tome.com/painting/pixel-art/aseprite/simple-exercise/",
+            "url": "https://nocturne-tome.com/painting/pixel-art/aseprite/simple-exercise/",
+            "title": "简单练习",
+            "date_published": "2025-03-02T15:50:56.000Z",
+            "content_html": "<h1 id=\"临摹学习\"><a class=\"anchor\" href=\"#临摹学习\">#</a> 临摹学习</h1>\n<h2 id=\"2025-03-02简单人物-光影\"><a class=\"anchor\" href=\"#2025-03-02简单人物-光影\">#</a> 2025-03-02：简单人物 + 光影</h2>\n<p><img loading=\"lazy\" data-src=\"character.png\" alt=\"\" width=\"400px\" /></p>\n",
+            "tags": [
+                "绘画",
+                "像素画",
+                "Aseprite学习",
+                "绘画",
+                "像素画",
+                "Aseprite学习"
+            ]
+        },
+        {
             "id": "https://nocturne-tome.com/game-development/game-maker/GM-dev-problem-record/",
             "url": "https://nocturne-tome.com/game-development/game-maker/GM-dev-problem-record/",
             "title": "GM开发问题记录",
@@ -24,7 +39,7 @@
             "url": "https://nocturne-tome.com/game-development/game-maker/the-first-game/",
             "title": "第一款游戏",
             "date_published": "2025-01-26T10:43:26.000Z",
-            "content_html": "<h1 id=\"开发进度\"><a class=\"anchor\" href=\"#开发进度\">#</a> 开发进度</h1>\n<h2 id=\"2025-01-26新建文件夹\"><a class=\"anchor\" href=\"#2025-01-26新建文件夹\">#</a> <s>2025-01-26：新建文件夹</s></h2>\n<p><img loading=\"lazy\" data-src=\"%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9.png\" alt=\"\" width=\"700px\" /></p>\n<h2 id=\"2025-02-14更换-gamer-maker-开发学习中\"><a class=\"anchor\" href=\"#2025-02-14更换-gamer-maker-开发学习中\">#</a> 2025-02-14：更换 Gamer Maker 开发，学习中...</h2>\n<p><img loading=\"lazy\" data-src=\"%E5%B7%A5%E4%BD%9C%E5%8C%BA.png\" alt=\"\" width=\"700px\" /><br />\n<img loading=\"lazy\" data-src=\"%E6%B8%B8%E6%88%8F%E7%95%8C%E9%9D%A2.png\" alt=\"\" width=\"700px\" /></p>\n",
+            "content_html": "<h1 id=\"开发进度\"><a class=\"anchor\" href=\"#开发进度\">#</a> 开发进度</h1>\n<h2 id=\"2025-01-26新建文件夹\"><a class=\"anchor\" href=\"#2025-01-26新建文件夹\">#</a> <s>2025-01-26：新建文件夹</s></h2>\n<p><img loading=\"lazy\" data-src=\"%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9.png\" alt=\"\" width=\"700px\" /></p>\n<h2 id=\"2025-02-14更换-gamer-maker-开发学习中\"><a class=\"anchor\" href=\"#2025-02-14更换-gamer-maker-开发学习中\">#</a> 2025-02-14：更换 Gamer Maker 开发，学习中...</h2>\n<p><img loading=\"lazy\" data-src=\"%E5%B7%A5%E4%BD%9C%E5%8C%BA.png\" alt=\"\" width=\"700px\" /><br />\n<img loading=\"lazy\" data-src=\"%E6%B8%B8%E6%88%8F%E7%95%8C%E9%9D%A2.png\" alt=\"\" width=\"700px\" /></p>\n<h2 id=\"2025-03-02aseprite-学习中\"><a class=\"anchor\" href=\"#2025-03-02aseprite-学习中\">#</a> 2025-03-02：Aseprite 学习中...</h2>\n<p>详情可查看：<a href=\"http://localhost:4000/painting/pixel-art/aseprite/simple-exercise/\">http://localhost:4000/painting/pixel-art/aseprite/simple-exercise/</a></p>\n<p><a href=\"!--swig%EF%BF%BC0--\">点击这里访问练习页面</a></p>\n",
             "tags": [
                 "游戏开发",
                 "GAME_MAKER",
@@ -263,20 +278,6 @@
                 "前端学习",
                 "前端",
                 "JavaScript"
-            ]
-        },
-        {
-            "id": "https://nocturne-tome.com/computer-science/programming/front-end/Tree-shaking/",
-            "url": "https://nocturne-tome.com/computer-science/programming/front-end/Tree-shaking/",
-            "title": "Tree-shaking",
-            "date_published": "2024-12-13T07:35:05.000Z",
-            "content_html": "<h1 id=\"定义\"><a class=\"anchor\" href=\"#定义\">#</a> 定义</h1>\n<p>“Tree-shaking”（摇树优化）是现代 JavaScript 模块打包工具（如 Webpack、Rollup 等）中的一种优化技术。</p>\n<p>其主要原理是在构建过程中，通过静态分析模块的导入和导出，检测并消除未实际使用的代码。这就好比摇动一棵树，让无用的 “叶子”（未使用的代码）掉落。</p>\n<p>例如，如果您有一个模块导出了多个函数，但在实际使用该模块的代码中只调用了其中的一部分函数，那么在打包时，未被调用的函数所对应的代码将不会被包含在最终的构建产物中。</p>\n<h1 id=\"优点\"><a class=\"anchor\" href=\"#优点\">#</a> 优点</h1>\n<ol>\n<li>减小生成的代码体积：去除未使用的代码，从而减少了最终文件的大小，提高了加载速度。</li>\n<li>优化性能：减少了不必要的代码执行和加载，提高了应用的性能。</li>\n</ol>\n<h1 id=\"实现\"><a class=\"anchor\" href=\"#实现\">#</a> 实现</h1>\n<p>要实现有效的 Tree-shaking，通常需要满足以下条件：</p>\n<ol>\n<li>使用 ES6 模块语法（ <code>import</code>  和  <code>export</code> ）。</li>\n<li>确保模块的代码具有 “纯”（无副作用）的特性，即模块中的函数和操作不会产生超出其返回值或对外部可见的状态更改。</li>\n</ol>\n<p>例如，假设有一个数学计算模块  <code>mathModule.js</code>  ：</p>\n<figure class=\"highlight javascript\"><figcaption data-lang=\"javascript\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token keyword\">export</span> <span class=\"token keyword\">function</span> <span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">a<span class=\"token punctuation\">,</span> b</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">&#123;</span></pre></td></tr><tr><td data-num=\"2\"></td><td><pre>  <span class=\"token keyword\">return</span> a <span class=\"token operator\">+</span> b<span class=\"token punctuation\">;</span></pre></td></tr><tr><td data-num=\"3\"></td><td><pre><span class=\"token punctuation\">&#125;</span></pre></td></tr><tr><td data-num=\"4\"></td><td><pre></pre></td></tr><tr><td data-num=\"5\"></td><td><pre><span class=\"token keyword\">export</span> <span class=\"token keyword\">function</span> <span class=\"token function\">subtract</span><span class=\"token punctuation\">(</span><span class=\"token parameter\">a<span class=\"token punctuation\">,</span> b</span><span class=\"token punctuation\">)</span> <span class=\"token punctuation\">&#123;</span></pre></td></tr><tr><td data-num=\"6\"></td><td><pre>  <span class=\"token keyword\">return</span> a <span class=\"token operator\">-</span> b<span class=\"token punctuation\">;</span></pre></td></tr><tr><td data-num=\"7\"></td><td><pre><span class=\"token punctuation\">&#125;</span></pre></td></tr></table></figure><p>在另一个文件中，如果只使用了  <code>add</code>  函数：</p>\n<figure class=\"highlight javascript\"><figcaption data-lang=\"javascript\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre><span class=\"token keyword\">import</span> <span class=\"token punctuation\">&#123;</span> add <span class=\"token punctuation\">&#125;</span> <span class=\"token keyword\">from</span> <span class=\"token string\">\"./mathModule\"</span><span class=\"token punctuation\">;</span></pre></td></tr><tr><td data-num=\"2\"></td><td><pre></pre></td></tr><tr><td data-num=\"3\"></td><td><pre>console<span class=\"token punctuation\">.</span><span class=\"token function\">log</span><span class=\"token punctuation\">(</span><span class=\"token function\">add</span><span class=\"token punctuation\">(</span><span class=\"token number\">2</span><span class=\"token punctuation\">,</span> <span class=\"token number\">3</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">)</span><span class=\"token punctuation\">;</span></pre></td></tr></table></figure><p>在打包时， <code>subtract</code>  函数的代码将通过 Tree-shaking 被去除。</p>\n",
-            "tags": [
-                "计算机科学",
-                "编程知识",
-                "前端学习",
-                "前端",
-                "打包构建"
             ]
         }
     ]

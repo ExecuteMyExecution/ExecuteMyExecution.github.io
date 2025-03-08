@@ -50,7 +50,7 @@
 &lt;/ol&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E4%BF%AE%E6%94%B9%E5%90%8E.png&#34; alt=&#34;&#34; width=&#34;700px&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;正常效果展示&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#正常效果展示&#34;&gt;#&lt;/a&gt; 正常效果展示&lt;/h2&gt;
-&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E6%AD%A3%E5%B8%B8%E6%98%BE%E7%A4%BA.png&#34; alt=&#34;&#34; width=&#34;700px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E6%AD%A3%E5%B8%B8%E5%B1%95%E7%A4%BA_%E4%B8%AD%E6%96%87%E4%B8%8D%E6%98%BE%E7%A4%BA.png&#34; alt=&#34;&#34; width=&#34;700px&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;一些注意点&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一些注意点&#34;&gt;#&lt;/a&gt; 一些注意点&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;
@@ -61,6 +61,24 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;Sample%E4%B8%8D%E5%8F%AF%E9%80%89.png&#34; alt=&#34;&#34; width=&#34;700px&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;碰撞问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#碰撞问题&#34;&gt;#&lt;/a&gt; 碰撞问题&lt;/h1&gt;
+&lt;h2 id=&#34;现象-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#现象-2&#34;&gt;#&lt;/a&gt; 现象&lt;/h2&gt;
+&lt;p&gt;游戏中需要处理人物和物体之间的碰撞。&lt;br /&gt;
+默认情况下 sprite 的碰撞形状都是覆盖全部范围长方形，为了实现真实的碰撞效果，我们往往需要修改 sprite 的 碰撞掩码（Collision Mask）。&lt;/p&gt;
+&lt;p&gt;比如我下面这张图就是从 obj_player 进入 Collision Mask 配置项，并完成修改。&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E4%BB%8EObject%E8%BF%9B%E5%85%A5Mask.png&#34; alt=&#34;alt text&#34; width=&#34;700px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;进入游戏测试发现人物向下走正常。&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E4%BA%BA%E7%89%A9%E5%90%91%E4%B8%8B%E7%A7%BB%E5%8A%A8%E6%AD%A3%E7%A1%AE.png&#34; alt=&#34;alt text&#34; width=&#34;300px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;但是向上走的时候出问题了，正常情况这里应该是靠到主角的腰部才走不过去，现在头部就上不去了。&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E4%BA%BA%E7%89%A9%E5%90%91%E4%B8%8A%E7%A2%B0%E6%92%9E%E9%94%99%E8%AF%AF.png&#34; alt=&#34;alt text&#34; width=&#34;300px&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;原因-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#原因-2&#34;&gt;#&lt;/a&gt; 原因&lt;/h2&gt;
+&lt;p&gt;因为从 obj_player 进入修改的 sprite 是 obj 默认的图，也就是向下的待机图。但是向上走的时候换成了向上的行走图，改图没有修改，所以呈现这样的效果。&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%90%91%E4%B8%8A%E8%A1%8C%E8%B5%B0%E5%9B%BE_%E4%BF%AE%E6%94%B9%E5%89%8D.png&#34; alt=&#34;alt text&#34; width=&#34;700px&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;解决方案-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#解决方案-2&#34;&gt;#&lt;/a&gt; 解决方案&lt;/h2&gt;
+&lt;p&gt;修改所有与人物相关的图（上下左右、待机行走）的 Collision Mask 即可。&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%90%91%E4%B8%8A%E8%A1%8C%E8%B5%B0%E5%9B%BE_%E4%BF%AE%E6%94%B9%E5%90%8E.png&#34; alt=&#34;alt text&#34; width=&#34;700px&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;正常效果展示-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#正常效果展示-2&#34;&gt;#&lt;/a&gt; 正常效果展示&lt;/h2&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E6%AD%A3%E5%B8%B8%E5%B1%95%E7%A4%BA_%E7%A2%B0%E6%92%9E%E9%97%AE%E9%A2%98.png&#34; alt=&#34;&#34; width=&#34;300px&#34; /&gt;&lt;/p&gt;
 </content>
         <category term="游戏开发" scheme="https://nocturne-tome.com/categories/game-development/" />
         <category term="GAME_MAKER" scheme="https://nocturne-tome.com/categories/game-development/game-maker/" />
@@ -72,7 +90,9 @@
         <id>https://nocturne-tome.com/game-development/game-maker/the-first-game/</id>
         <title>第一款游戏</title>
         <link rel="alternate" href="https://nocturne-tome.com/game-development/game-maker/the-first-game/"/>
-        <content type="html">&lt;h1 id=&#34;开发进度&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#开发进度&#34;&gt;#&lt;/a&gt; 开发进度&lt;/h1&gt;
+        <content type="html">&lt;h1 id=&#34;教程项目体验地址&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#教程项目体验地址&#34;&gt;#&lt;/a&gt; 教程项目体验地址&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://gx.games/games/czh5mc/my-first-rpg-game/tracks/413f97cc-5b7f-4f84-9d58-f973b75c2b15/&#34;&gt;My First RPG Game&lt;/a&gt;（半成品）&lt;/p&gt;
+&lt;h1 id=&#34;开发进度&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#开发进度&#34;&gt;#&lt;/a&gt; 开发进度&lt;/h1&gt;
 &lt;h2 id=&#34;2025-01-26新建文件夹&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2025-01-26新建文件夹&#34;&gt;#&lt;/a&gt; &lt;s&gt;2025-01-26：新建文件夹&lt;/s&gt;&lt;/h2&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9.png&#34; alt=&#34;&#34; width=&#34;700px&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;2025-02-14更换-gamer-maker-开发学习中&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#2025-02-14更换-gamer-maker-开发学习中&#34;&gt;#&lt;/a&gt; 2025-02-14：更换 Gamer Maker 开发，学习中...&lt;/h2&gt;
@@ -92,7 +112,7 @@
         <title>关于本站</title>
         <link rel="alternate" href="https://nocturne-tome.com/about/about-site/"/>
         <content type="html">&lt;h1 id=&#34;关于本站&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#关于本站&#34;&gt;#&lt;/a&gt; 关于本站&lt;/h1&gt;
-&lt;p&gt;记录自己的足迹，以便后人赛博考古的时候能被发现。&lt;/p&gt;
+&lt;p&gt;记录自己的足迹，争取在后人赛博考古的时候能被发现。&lt;/p&gt;
 &lt;h1 id=&#34;关于作者&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#关于作者&#34;&gt;#&lt;/a&gt; 关于作者&lt;/h1&gt;
 &lt;p&gt;平平无奇的 INFJ，喜欢与世无争，愿望是世界和平。&lt;/p&gt;
 &lt;h1 id=&#34;联系方式&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#联系方式&#34;&gt;#&lt;/a&gt; 联系方式&lt;/h1&gt;

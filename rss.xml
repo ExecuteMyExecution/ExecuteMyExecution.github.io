@@ -87,6 +87,32 @@
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E5%90%91%E4%B8%8A%E8%A1%8C%E8%B5%B0%E5%9B%BE_%E4%BF%AE%E6%94%B9%E5%90%8E.png&#34; alt=&#34;alt text&#34; width=&#34;700px&#34; /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;正常效果展示-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#正常效果展示-2&#34;&gt;#&lt;/a&gt; 正常效果展示&lt;/h2&gt;
 &lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E6%AD%A3%E5%B8%B8%E5%B1%95%E7%A4%BA_%E7%A2%B0%E6%92%9E%E9%97%AE%E9%A2%98.png&#34; alt=&#34;&#34; width=&#34;300px&#34; /&gt;&lt;/p&gt;
+&lt;h1 id=&#34;物体遮掩问题&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#物体遮掩问题&#34;&gt;#&lt;/a&gt; 物体遮掩问题&lt;/h1&gt;
+&lt;h2 id=&#34;现象-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#现象-3&#34;&gt;#&lt;/a&gt; 现象&lt;/h2&gt;
+&lt;p&gt;在 rpg 游戏中，视角一般是俯视，所以会存在以下现象：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;物体重心在人物重心下方，物体遮挡人物。&lt;/li&gt;
+&lt;li&gt;物体重心在人物重心上方，人物遮挡物体。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如下图所示：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E6%AD%A3%E5%B8%B8%E9%81%AE%E6%8C%A1%E6%95%88%E6%9E%9C.png&#34; alt=&#34;alt text&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;但是测试过程发现了这样的现象：&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E9%9D%9E%E6%AD%A3%E5%B8%B8%E9%81%AE%E6%8C%A1.png&#34; alt=&#34;alt text&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;原因-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#原因-3&#34;&gt;#&lt;/a&gt; 原因&lt;/h2&gt;
+&lt;p&gt;由于我设置过人物和物体 parent 的 depth 均为 -y 了，那只能是 sprite 的重心没有设置成功。&lt;/p&gt;
+&lt;h2 id=&#34;解决方案-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#解决方案-3&#34;&gt;#&lt;/a&gt; 解决方案&lt;/h2&gt;
+&lt;p&gt;Origin 点用于设置重心，有如下规则：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对于角色，将 Origin 点设置在角色的脚部，确保角色在移动和旋转时不会偏离地面。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E4%BA%BA%E7%89%A9%E9%87%8D%E5%BF%83%E8%AE%BE%E7%BD%AE.png&#34; alt=&#34;alt text&#34; /&gt;&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;对于物体，将 Origin 点设置在其重心位置。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E7%89%A9%E4%BD%93%E9%87%8D%E5%BF%83%E8%AE%BE%E7%BD%AE.png&#34; alt=&#34;alt text&#34; /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;正常效果展示-3&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#正常效果展示-3&#34;&gt;#&lt;/a&gt; 正常效果展示&lt;/h2&gt;
+&lt;p&gt;（人物已处于房子后面）&lt;/p&gt;
+&lt;p&gt;&lt;img loading=&#34;lazy&#34; data-src=&#34;%E6%AD%A3%E5%B8%B8%E5%B1%95%E7%A4%BA_%E7%89%A9%E4%BD%93%E9%81%AE%E6%8E%A9%E9%97%AE%E9%A2%98.png&#34; alt=&#34;alt text&#34; /&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>

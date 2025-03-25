@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="白夜书" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="白夜书" type="application/atom+xml"><link rel="alternate" type="application/json" title="白夜书" href="https://nocturne-tome.cn/feed.json"/><link rel="preconnect" href="https://s4.zstatic.net"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="stylesheet" href="/css/app.css?v=0.4.25"><link rel="modulepreload" href="/js/chunk-I5QSJOHZ.js"></link><link rel="modulepreload" href="/js/chunk-KWKVE2HW.js"></link><link rel="modulepreload" href="/js/chunk-NGB4RLVC.js"></link><link rel="modulepreload" href="/js/chunk-UTIHLA7W.js"></link><link rel="modulepreload" href="/js/copy-tex-2TE3QLSQ.js"></link><link rel="modulepreload" href="/js/index.esm-QUUBRK4D.js"></link><link rel="modulepreload" href="/js/post-BSCEQQ5V.js"></link><link rel="modulepreload" href="/js/quicklink-UILFIQT4.js"></link><link rel="modulepreload" href="/js/search-QHZFOYU4.js"></link><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img29.webp" as="image" fetchpriority="high"><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img94.webp" as="image" fetchpriority="high"><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img67.webp" as="image" fetchpriority="high"><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img47.webp" as="image" fetchpriority="high"><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img50.webp" as="image" fetchpriority="high"><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img51.webp" as="image" fetchpriority="high"><meta name="keywords" content="前端,"/><meta name="description" content="来点奇思妙想~!"/><link rel="canonical" href="https://nocturne-tome.cn/computer-science/programming/front-end/React/"><title>React</title><meta name="generator" content="Hexo 7.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">React</h1><div class="meta"><span class="item" title="创建时间：2024-12-16 14:44:39"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">发表于</span><time itemprop="dateCreated datePublished" datetime="2024-12-16T14:44:39+08:00">2024-12-16</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span class="text">本文字数</span><span>5.1k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span class="text">阅读时长</span><span>5 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">Nocturne Tome</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img29.webp&quot;);"></li><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img94.webp&quot;);"></li><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img67.webp&quot;);"></li><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img47.webp&quot;);"></li><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img50.webp&quot;);"></li><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img51.webp&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">首页</a></span><i class="ic i-angle-right"></i><span itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/computer-science/" itemprop="item" rel="index" title="分类于计算机科学"><span itemprop="name">计算机科学<meta itemprop="position" content="0"/></span></a></span><i class="ic i-angle-right"></i><span itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/computer-science/programming/" itemprop="item" rel="index" title="分类于编程知识"><span itemprop="name">编程知识<meta itemprop="position" content="1"/></span></a></span><i class="ic i-angle-right"></i><span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/computer-science/programming/front-end/" itemprop="item" rel="index" title="分类于前端学习"><span itemprop="name">前端学习<meta itemprop="position" content="2"/></span></a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://nocturne-tome.cn/computer-science/programming/front-end/React/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="BaiYe"/><meta itemprop="description" content="^ ^, 来点奇思妙想~!"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="白夜书"/></span><div class="body md" itemprop="articleBody"><h1 id="hook"><a class="anchor" href="#hook">#</a> hook</h1>
+<table>
+<thead>
+<tr>
+<th><strong>名称</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>用途</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>useState</td>
+<td>允许你向组件添加一个 状态变量<br/>参数 <code>initialState</code> ：<br/>你希望 state 初始化的值。它可以是任何类型的值，但对于函数有特殊的行为。在初始渲染后，此参数将被忽略。</td>
+<td>1. 为组件添加状态<br/>2. 根据先前的 state 更新 state<br/>3. 更新状态中的对象和数组<br/>4. 避免重复创建初始状态<br/>5. 使用 key 重置状态<br/>6. 存储前一次渲染的信息</td>
+<td></td>
+</tr>
+<tr>
+<td>useEffect</td>
+<td>允许你将组件与外部系统同步<br/>(state 是只读的。即使是对象或数组也不要尝试修改它，如果需要这样做，可以使用 Immer 第三方库)</td>
+<td>1. 连接到外部系统<br/>2. 在自定义 Hook 中封装 Effect<br/>3. 控制非 React 小部件<br/>4. 使用 Effect 请求数据<br/>5. 指定响应式依赖项<br/>6. 在 Effect 中根据先前 state 更新 state（使用更新函数）<br/>7. 删除不必要的对象 / 函数依赖项<br/>8. 在服务器和客户端上显示不同的内容（Effect 不在服务器上运行）</td>
+<td></td>
+</tr>
+<tr>
+<td>useReducer</td>
+<td>它允许你向组件里面添加一个 reducer</td>
+<td>1. 向组件添加 reducer<br/>2. 实现 reducer 函数<br/>3. 避免重新创建初始值</td>
+<td>useState 和 useReducer 对比<br/>+ 代码体积：通常来说使用后者编写的代码会较多（reducer 函数和需要调度的 actions）；但当多个事件有相似逻辑时，使用 uesReducer 可以减少代码量<br/>+ 可读性：后者允许你将状态更新逻辑与事件处理程序分离开来，在逻辑复杂的情况可以提升可读性<br/>+ 可调试性：useReducer 的可调试性更好<br/>+ 可测试性：reducer 是一个不依赖于组件的纯函数。这就意味着你可以单独对它进行测试</td>
+</tr>
+<tr>
+<td>useCallback</td>
+<td>允许你在多次渲染中缓存函数</td>
+<td>1. 跳过组件的重新渲染<br/>2. 从记忆化回调中更新 state<br/>3. 防止频繁触发 Effect<br/>4. 优化自定义 Hook</td>
+<td><strong>经常和 memo 一起使用</strong></td>
+</tr>
+<tr>
+<td>useMemo</td>
+<td>在每次重新渲染的时候能够缓存计算的结果</td>
+<td>1. 跳过代价昂贵的重新计算<br/>2. 跳过组件的重新渲染<br/>3. 记忆另一个 Hook 的依赖<br/>4. 记忆一个函数</td>
+<td>1. 和 memo 区分开，memo 用于对组件的记忆，而 useMemo 则一般用于对计算结果的记忆<br/>2. 使用 ref 可以确保：<br/>+ 可以在重新渲染之间 <strong>存储信息</strong>（普通对象存储的值每次渲染都会重置）。<br/>+ 改变它 <strong>不会触发重新渲染</strong>（状态变量会触发重新渲染）。<br/>+ 对于组件的每个副本而言，<strong>这些信息都是本地的</strong>（外部变量则是共享的）。<br/>3. 一般和 memo 一起使用</td>
+</tr>
+<tr>
+<td>useRef</td>
+<td>它能帮助引用一个不需要渲染的值</td>
+<td>1. 使用用 ref 引用一个值<br/>2. 通过 ref 操作 DOM<br/>3. 避免重复创建 ref 的内容（ <code>useRef(null)</code> ）</td>
+<td>1. 改变 ref 不会触发重新渲染。这意味着 ref 是存储一些不影响组件视图输出信息的完美选择<br/>2. 如在组件内部使用： <code>const ref = useRef(null)</code> ，则 ref 指向该组件</td>
+</tr>
+<tr>
+<td>useSyncExternalStore</td>
+<td>一个让你订阅外部 store 的 React Hook</td>
+<td>1. 订阅外部 store<br/>2. 订阅浏览器 API<br/>3. 把逻辑抽取到自定义 Hook<br/>4. 添加服务端渲染支持</td>
+<td>1. 第一个参数 subscribe 里面的 callback 参数，是于告知 hook 更新状态的通信函数，在需要状态改变的时候调用就行，如：xxx.addEventListener ('click', callback)</td>
+</tr>
+</tbody>
+</table>
+<h1 id="其他函数"><a class="anchor" href="#其他函数">#</a> 其他函数</h1>
+<table>
+<thead>
+<tr>
+<th><strong>名称</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>用途</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>memo</td>
+<td>允许你的组件在 props 没有改变的情况下跳过重新渲染<br/>返回一个新的 React 组件。它的行为与提供给 memo 的组件相同，只是当它的父组件重新渲染时 React 不会总是重新渲染它，除非它的 props 发生了变化</td>
+<td>1. 当 props 没有改变时跳过重新渲染<br/>2. 使用 state 更新记忆化（memoized）组件<br/>3. 使用 context 更新记忆化（memoized）组件<br/>4. 最小化 props 的变化</td>
+<td>1. 和 useMemo 区分开，memo 用于对组件的记忆，而 useMemo 则一般用于对计算结果的记忆<br/>2. 一般和 useMemo、useCallback 一起使用</td>
+</tr>
+<tr>
+<td>forwardRef</td>
+<td>允许组件使用 ref 将 DOM 节点暴露给父组件</td>
+<td>1. 将 DOM 节点暴露给父组件<br/>2. 在多个组件中转发 ref</td>
+<td></td>
+</tr>
+<tr>
+<td>reducer</td>
+<td>对于拥有许多状态更新逻辑的组件来说，过于分散的事件处理程序可能会令人不知所措。对于这种情况，你可以将组件的所有状态更新逻辑整合到一个外部函数中，这个函数叫作 reducer。</td>
+<td>第 1 步：将设置状态的逻辑修改成 dispatch 的一个 action<br/>第 2 步：编写一个 reducer 函数<br/>第 3 步：在组件中使用 reducer</td>
+<td>reducer 函数是放置逻辑的地方。它接受当前 state 和 action 对象，并返回更新后的 state</td>
+</tr>
+<tr>
+<td>flushSync</td>
+<td>允许你强制 React 在提供的回调函数内同步刷新任何更新，这将确保 DOM 立即更新</td>
+<td></td>
+<td><span style="color:#f2783a;"> 使用 flushSync 是不常见的行为，并且可能损伤应用程序的性能。</span><br/></td>
+</tr>
+</tbody>
+</table>
+<h1 id="其他概念"><a class="anchor" href="#其他概念">#</a> 其他概念</h1>
+<table>
+<thead>
+<tr>
+<th><strong>名称</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>举例</strong></th>
+<th><strong>备注</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="2">state</td>
+<td>state 如同一张<strong>快照</strong>：<br/>也许 state 变量看起来和一般的可读写的 JavaScript 变量类似。但 state 在其表现出的特性上更像是一张<strong>快照</strong>。<ins>设置它不会更改你已有的 state 变量，但会触发重新渲染</ins>。<br/>批处理</td>
+<td>假设有如下文件：<br/> <code>javascript import &#123; useState &#125; from 'react';  export default function Counter() &#123;   const [number, setNumber] = useState(0);    return (     &lt;&gt;       &lt;h1&gt;&#123;number&#125;&lt;/h1&gt;       &lt;button onClick=&#123;() =&gt; &#123;         setNumber(number + 1);         setNumber(number + 1);         setNumber(number + 1);       &#125;&#125;&gt;+3&lt;/button&gt;     &lt;/&gt;   ) &#125; </code>   <br/>当点击按钮时，number 只会加 1，React 中的处理逻辑是：<br/>1.  <code>setNumber(number + 1)</code> ： <code>number</code>  是  <code>0</code>  所以  <code>setNumber(0 + 1)</code> 。<br/>    - React 准备在下一次渲染时将  <code>number</code>  更改为  <code>1</code> 。<br/>2.  <code>setNumber(number + 1)</code> ： <code>number</code>  是 <code>0</code>  所以  <code>setNumber(0 + 1)</code> 。<br/>    - React 准备在下一次渲染时将  <code>number</code>  更改为  <code>1</code> 。<br/>3.  <code>setNumber(number + 1)</code> ： <code>number</code>  是 <code>0</code>  所以  <code>setNumber(0 + 1)</code> 。<br/>    - React 准备在下一次渲染时将  <code>number</code>  更改为  <code>1</code> 。</td>
+<td>React 会使 state 的值始终” 固定 “在一次渲染的各个事件处理函数内部。 你无需担心代码运行时 state 是否发生了变化。<br/>如果需要在重新渲染之前读取最新的 state，应该使用<strong>状态更新函数。</strong><br/>React 会等到事件处理函数中的 所有 代码都运行完毕再处理你的 state 更新。 这就是为什么重新渲染只会发生在所有这些 setNumber () 调用 之后 的原因。</td>
+</tr>
+<tr>
+<td>在下次渲染前多次更新同一个 state，可以使用<strong>状态更新函数</strong></td>
+<td>假设有如下文件：<br/> <code>javascript import &#123; useState &#125; from 'react';  export default function Counter() &#123;   const [number, setNumber] = useState(0);    return (     &lt;&gt;       &lt;h1&gt;&#123;number&#125;&lt;/h1&gt;       &lt;button onClick=&#123;() =&gt; &#123;         setNumber(n =&gt; n + 1);         setNumber(n =&gt; n + 1);         setNumber(n =&gt; n + 1);       &#125;&#125;&gt;+3&lt;/button&gt;     &lt;/&gt;   ) &#125; </code>   <br/>这个 onClick 与之前函数不同的地方在于：使用 <code>setNumber(n =&gt; n + 1)</code>  替代 <code>setNumber(number + 1)</code> 。这是一种告诉 React “用 state 值做某事” 而不是仅仅替换它的方法。<br/>在这里， <code>n =&gt; n + 1</code>  被称为<u>更新函数</u>。当你将它传递给一个 state 设置函数时：<br/>1. React 会将此函数加入队列，以便在事件处理函数中的所有其他代码运行后进行处理。 <br/>2. 在下一次渲染期间，React 会遍历队列并给你更新之后的最终 state。<br/> <code>javascript setNumber(n =&gt; n + 1); setNumber(n =&gt; n + 1); setNumber(n =&gt; n + 1); </code>   <br/>下面是 React 在执行事件处理函数时处理这几行代码的过程：<br/>1. setNumber (n =&gt; n + 1)：n =&gt; n + 1 是一个函数。React 将它加入队列。<br/>2. setNumber (n =&gt; n + 1)：n =&gt; n + 1 是一个函数。React 将它加入队列。 <br/>3. setNumber (n =&gt; n + 1)：n =&gt; n + 1 是一个函数。React 将它加入队列。<br/>当你在下次渲染期间调用  <code>useState</code>  时，React 会遍历队列。之前的  <code>number</code>  state 的值是  <code>0</code> ，所以这就是 React 作为参数  <code>n</code>  传递给第一个更新函数的值。然后 React 会获取你上一个更新函数的返回值，并将其作为  <code>n</code>  传递给下一个更新函数，以此类推：<img loading="lazy" data-src="update-queue.png" alt="" height="220px" />React 会保存  <code>3</code>  为最终结果并从  <code>useState</code>  中返回。</td>
+<td></td>
+</tr>
+<tr>
+<td>响应式值</td>
+<td>响应式值包括 <strong>props</strong> 和直接在组件内声明的<strong>所有变量和函数</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="tags"><a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="ic i-tag"></i>前端</a><a href="/tags/React/" rel="tag"><i class="ic i-tag"></i>React</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">更新于 </span><time title="修改时间：2025-02-14 15:55:16" itemprop="dateModified" datetime="2025-02-14T15:55:16+08:00">2025-02-14</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" data-src="/assets/wechatpay.jpg" alt="BaiYe 微信支付"/><p>微信支付</p></div><div><img loading="lazy" data-src="/assets/alipay.jpg" alt="BaiYe 支付宝"/><p>支付宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者：</strong>BaiYe<i class="ic i-at"><em>@</em></i>白夜书</li><li class="link"><strong>本文链接：</strong><a href="https://nocturne-tome.cn/computer-science/programming/front-end/React/" title="React">https://nocturne-tome.cn/computer-science/programming/front-end/React/</a></li><li class="license"><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/literature/transcribe/sentence/%E6%84%9F%E6%82%9F/" rel="prev" itemprop="url" data-background-image="https:&#x2F;&#x2F;gitee.com&#x2F;Delusional_man&#x2F;image&#x2F;raw&#x2F;master&#x2F;img&#x2F;img90.webp" title="感悟"><span class="type">上一篇</span><span class="category"><i class="ic i-flag"></i>短句</span><h3>感悟</h3></a></div><div class="item right"><a href="/computer-science/programming/front-end/JS%E4%B8%AD%E7%9A%84%E6%89%93%E5%8D%B0%E6%96%B9%E6%B3%95/" rel="next" itemprop="url" data-background-image="https:&#x2F;&#x2F;gitee.com&#x2F;Delusional_man&#x2F;image&#x2F;raw&#x2F;master&#x2F;img&#x2F;img29.webp" title="JS中的打印方法"><span class="type">下一篇</span><span class="category"><i class="ic i-flag"></i>前端学习</span><h3>JS中的打印方法</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hook"><span class="toc-number">1.</span> <span class="toc-text"> hook</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text"> 其他函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%A6%82%E5%BF%B5"><span class="toc-number">3.</span> <span class="toc-text"> 其他概念</span></a></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li ><a href="/computer-science/programming/front-end/WebAssembly/" rel="bookmark" title="WebAssembly">WebAssembly</a></li><li ><a href="/computer-science/programming/front-end/Tree-shaking/" rel="bookmark" title="Tree-shaking">Tree-shaking</a></li><li ><a href="/computer-science/programming/front-end/Float32Array/" rel="bookmark" title="Float32Array">Float32Array</a></li><li ><a href="/computer-science/programming/front-end/%E8%A3%85%E9%A5%B0%E5%99%A8%E8%AF%AD%E6%B3%95/" rel="bookmark" title="装饰器语法">装饰器语法</a></li><li ><a href="/computer-science/programming/front-end/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" rel="bookmark" title="依赖注入(DI)">依赖注入(DI)</a></li><li ><a href="/computer-science/programming/front-end/meta/" rel="bookmark" title="meta">meta</a></li><li ><a href="/computer-science/programming/front-end/%E5%85%83%E6%95%B0%E6%8D%AE/" rel="bookmark" title="元数据">元数据</a></li><li ><a href="/computer-science/programming/front-end/%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/" rel="bookmark" title="媒体查询">媒体查询</a></li><li  class="active"><a href="/computer-science/programming/front-end/React/" rel="bookmark" title="React">React</a></li><li ><a href="/computer-science/programming/front-end/JS%E4%B8%AD%E7%9A%84%E6%89%93%E5%8D%B0%E6%96%B9%E6%B3%95/" rel="bookmark" title="JS中的打印方法">JS中的打印方法</a></li><li ><a href="/computer-science/programming/front-end/%E9%A2%84%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%8A%A0%E8%BD%BD/" rel="bookmark" title="预获取和预加载(prefetch&preload)">预获取和预加载(prefetch&preload)</a></li><li ><a href="/computer-science/programming/front-end/Module/" rel="bookmark" title="Module">Module</a></li><li ><a href="/computer-science/programming/front-end/Nginx/" rel="bookmark" title="Nginx">Nginx</a></li><li ><a href="/computer-science/programming/front-end/devicePixelRatio/" rel="bookmark" title="devicePixelRatio">devicePixelRatio</a></li><li ><a href="/computer-science/programming/front-end/Mobx/" rel="bookmark" title="Mobx">Mobx</a></li><li ><a href="/computer-science/programming/front-end/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="bookmark" title="代理服务器">代理服务器</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="BaiYe" src="/assets/avatar.jpg"/><p class="name" itemprop="name">BaiYe</p><div class="description" itemprop="description">来点奇思妙想~!</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">28</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">12</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">26</span><span class="name">标签</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/ExecuteMyExecution" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;ExecuteMyExecution"><i class="ic i-github"></i></a><a target="_blank" rel="noopener" href="https://gitee.com/Delusional_man" class="item gitee" title="https:&#x2F;&#x2F;gitee.com&#x2F;Delusional_man"><i class="ic i-gitee"></i></a><a target="_blank" rel="noopener" href="https://music.163.com/#/user/home?id=402168162" class="item music" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;402168162"><i class="ic i-cloud-music"></i></a><a href="/nocturnetome@gmail.com" class="item email" title="nocturnetome@gmail.com"><i class="ic i-envelope"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item dropdown"><a href="#" onclick="return false;"><i class="ic i-user"></i>关于</a><ul class="submenu"><li class="item"><a href="/about/about-site" rel="section"><i class="ic i-star"></i>关于本站</a></li><li class="item"><a href="/about/changelog/" rel="section"><i class="ic i-cloud"></i>更新日志</a></li><li class="item"><a href="/admiration/" rel="section"><i class="ic i-coffee"></i>赞赏博主</a></li></ul></li><li class="item dropdown"><a href="#" onclick="return false;"><i class="ic i-feather"></i>文章</a><ul class="submenu"><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></li><li class="item"><a href="/friends/" rel="section"><i class="ic i-heart"></i>友达</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/computer-science/programming/front-end/JS%E4%B8%AD%E7%9A%84%E6%89%93%E5%8D%B0%E6%96%B9%E6%B3%95/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/literature/transcribe/sentence/%E6%84%9F%E6%82%9F/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/meta/">meta</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/Mobx/">Mobx</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/game-development/" title="分类于游戏开发">游戏开发</a><i class="ic i-angle-right"></i><a href="/categories/game-development/game-maker/" title="分类于GAME_MAKER">GAME_MAKER</a></div><span><a href="/game-development/game-maker/the-first-game/">第一款游戏</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/%E8%A3%85%E9%A5%B0%E5%99%A8%E8%AF%AD%E6%B3%95/">装饰器语法</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/">代理服务器</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/computer-science/PAC/">PAC</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/literature/" title="分类于文学">文学</a><i class="ic i-angle-right"></i><a href="/categories/literature/transcribe/" title="分类于摘录">摘录</a><i class="ic i-angle-right"></i><a href="/categories/literature/transcribe/sentence/" title="分类于短句">短句</a></div><span><a href="/literature/transcribe/sentence/%E6%84%9F%E6%82%9F/">感悟</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/Module/">Module</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/literature/%E5%BE%80%E4%BA%8B%E5%A6%82%E7%83%9F/">往事如烟</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/%E9%A2%84%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%8A%A0%E8%BD%BD/">预获取和预加载(prefetch&preload)</a></span></li></ul></div><div class="rpost pjax"><h2>最新评论</h2></div></div><div class="status"><div class="copyright">&copy; 2024 -<span itemprop="copyrightYear">2025</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">BaiYe @ Nocturne Tome</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">71k 字</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">1:04</span></div><div class="powered-by">基于 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+    path: `computer-science/programming/front-end/React/`,
+    favicon: {
+        show: `（●´3｀●）やれやれだぜ`,
+        hide: `(´Д｀)大変だ！`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    nocopy: "false",
+    copyright: `复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。`,
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};
+</script><script src="https://s4.zstatic.net/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous" fetchpriority="high"></script><script src="https://s4.zstatic.net/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha384-ZvpUoO&#x2F;+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn&#x2F;6Z&#x2F;hRTt8+pR6L4N2" crossorigin="anonymous" fetchpriority="high"></script><script src="https://s4.zstatic.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha384-Zm+UU4tdcfAm29vg+MTbfu&#x2F;&#x2F;q5B&#x2F;lInMbMCr4T8c9rQFyOv6PlfQYpB5wItcXWe7" crossorigin="anonymous" fetchpriority="high"></script><script src="https://s4.zstatic.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" integrity="sha384-TOxsBplaL96&#x2F;QDWPIUg+ye3v89qSE3s22XNtJMmCeZEep3cVDmXy1zEfZvVv+y2m" crossorigin="anonymous" fetchpriority="high"></script><script src="/js/siteInit.js?v=0.4.25" type="module" fetchpriority="high" defer></script></body></html>

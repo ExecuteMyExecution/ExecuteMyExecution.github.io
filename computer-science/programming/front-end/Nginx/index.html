@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"/><meta name="theme-color" content="#222"/><meta http-equiv="X-UA-COMPATIBLE" content="IE=edge,chrome=1"/><meta name="renderer" content="webkit"/><link rel="icon" type="image/ico" sizes="32x32" href="/assets/favicon.ico"/><link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png"/><link rel="alternate" href="/rss.xml" title="白夜书" type="application/rss+xml"><link rel="alternate" href="/atom.xml" title="白夜书" type="application/atom+xml"><link rel="alternate" type="application/json" title="白夜书" href="https://nocturne-tome.cn/feed.json"/><link rel="preconnect" href="https://s4.zstatic.net"/><link rel="preconnect" href="https://at.alicdn.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CFredericka%20the%20Great:400,400italic,700,700italic%7CNoto%20Serif%20JP:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CInconsolata:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" media="none" onload="this.media&#x3D;&#39;all&#39;"><link rel="stylesheet" href="/css/app.css?v=0.4.25"><link rel="modulepreload" href="/js/chunk-I5QSJOHZ.js"></link><link rel="modulepreload" href="/js/chunk-KWKVE2HW.js"></link><link rel="modulepreload" href="/js/chunk-NGB4RLVC.js"></link><link rel="modulepreload" href="/js/chunk-UTIHLA7W.js"></link><link rel="modulepreload" href="/js/copy-tex-2TE3QLSQ.js"></link><link rel="modulepreload" href="/js/index.esm-QUUBRK4D.js"></link><link rel="modulepreload" href="/js/post-BSCEQQ5V.js"></link><link rel="modulepreload" href="/js/quicklink-UILFIQT4.js"></link><link rel="modulepreload" href="/js/search-QHZFOYU4.js"></link><link rel="modulepreload" href="/js/siteInit.js"></link><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img38.webp" as="image" fetchpriority="high"><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img31.webp" as="image" fetchpriority="high"><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img34.webp" as="image" fetchpriority="high"><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img66.webp" as="image" fetchpriority="high"><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img67.webp" as="image" fetchpriority="high"><link rel="preload" href="https://gitee.com/Delusional_man/image/raw/master/img/img16.webp" as="image" fetchpriority="high"><meta name="keywords" content="前端,"/><meta name="description" content="来点奇思妙想~!"/><link rel="canonical" href="https://nocturne-tome.cn/computer-science/programming/front-end/Nginx/"><title>Nginx</title><meta name="generator" content="Hexo 7.3.0"></head><body itemscope itemtype="http://schema.org/WebPage"><div id="loading"><div class="cat"><div class="body"></div><div class="head"><div class="face"></div></div><div class="foot"><div class="tummy-end"></div><div class="bottom"></div><div class="legs left"></div><div class="legs right"></div></div><div class="paw"><div class="hands left"></div><div class="hands right"></div></div></div></div><div id="container"><header id="header" itemscope itemtype="http://schema.org/WPHeader"><div class="inner"><div id="brand"><div class="pjax"><h1 itemprop="name headline">Nginx</h1><div class="meta"><span class="item" title="创建时间：2024-12-16 19:15:45"><span class="icon"><i class="ic i-calendar"></i></span><span class="text">发表于</span><time itemprop="dateCreated datePublished" datetime="2024-12-16T19:15:45+08:00">2024-12-16</time></span><span class="item" title="本文字数"><span class="icon"><i class="ic i-pen"></i></span><span class="text">本文字数</span><span>13k</span><span class="text">字</span></span><span class="item" title="阅读时长"><span class="icon"><i class="ic i-clock"></i></span><span class="text">阅读时长</span><span>12 分钟</span></span></div></div></div><nav id="nav"><div class="inner"><div class="toggle"><div class="lines" aria-label="切换导航栏"><span class="line"></span><span class="line"></span><span class="line"></span></div></div><ul class="menu"><li class="item title"><a href="/" rel="start">Nocturne Tome</a></li></ul><ul class="right" id="rightNav"><li class="item theme"><i class="ic i-sun"></i></li><li class="item search"><i class="ic i-search"></i></li></ul></div></nav></div><div class="pjax" id="imgs"><ul><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img38.webp&quot;);"></li><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img31.webp&quot;);"></li><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img34.webp&quot;);"></li><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img66.webp&quot;);"></li><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img67.webp&quot;);"></li><li class="item" style="background-image: url(&quot;https://gitee.com/Delusional_man/image/raw/master/img/img16.webp&quot;);"></li></ul></div></header><div id="waves"><svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path></defs><g class="parallax"><use xlink:href="#gentle-wave" x="48" y="0"></use><use xlink:href="#gentle-wave" x="48" y="3"></use><use xlink:href="#gentle-wave" x="48" y="5"></use><use xlink:href="#gentle-wave" x="48" y="7"></use></g></svg></div><main><div class="inner"><div class="pjax" id="main"><div class="article wrap"><div class="breadcrumb" itemListElement itemscope itemtype="https://schema.org/BreadcrumbList"><i class="ic i-home"></i><span><a href="/">首页</a></span><i class="ic i-angle-right"></i><span itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/computer-science/" itemprop="item" rel="index" title="分类于计算机科学"><span itemprop="name">计算机科学<meta itemprop="position" content="0"/></span></a></span><i class="ic i-angle-right"></i><span itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/computer-science/programming/" itemprop="item" rel="index" title="分类于编程知识"><span itemprop="name">编程知识<meta itemprop="position" content="1"/></span></a></span><i class="ic i-angle-right"></i><span class="current" itemprop="itemListElement" itemscope="itemscope" itemtype="https://schema.org/ListItem"><a href="/categories/computer-science/programming/front-end/" itemprop="item" rel="index" title="分类于前端学习"><span itemprop="name">前端学习<meta itemprop="position" content="2"/></span></a></span></div><article class="post block" itemscope="itemscope" itemtype="http://schema.org/Article" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://nocturne-tome.cn/computer-science/programming/front-end/Nginx/"/><span hidden="hidden" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><meta itemprop="image" content="/assets/avatar.jpg"/><meta itemprop="name" content="BaiYe"/><meta itemprop="description" content="^ ^, 来点奇思妙想~!"/></span><span hidden="hidden" itemprop="publisher" itemscope="itemscope" itemtype="http://schema.org/Organization"><meta itemprop="name" content="白夜书"/></span><div class="body md" itemprop="articleBody"><h1 id="定义"><a class="anchor" href="#定义">#</a> 定义</h1>
+<p>Nginx 是一个高性能的 HTTP 服务器、反向代理服务器以及邮件代理服务器。它以高并发、高吞吐量、低内存消耗而著称，常用于静态资源服务、负载均衡、反向代理和缓存等场景。</p>
+<p>至于为什么要用代理服务器，请看：<a target="_blank" rel="noopener" href="http://localhost:4000/computer-science/programming/front-end/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/">代理服务器</a></p>
+<h1 id="主要功能"><a class="anchor" href="#主要功能">#</a> 主要功能</h1>
+<ol>
+<li><strong>HTTP 服务器</strong>：Nginx 可以作为静态文件服务器，直接提供 HTML、CSS、JavaScript、图片等文件。它非常高效，适合用作前端项目的静态资源托管服务器。</li>
+<li><strong>反向代理</strong>：Nginx 可以将客户端的请求转发给后端服务器（如 Node.js、Python、Java 应用），起到代理作用，同时隐藏后端服务器，提升安全性。</li>
+<li><strong>负载均衡</strong>：Nginx 可以将请求分发到多个后端服务器（负载均衡），根据服务器的健康状态和负载情况，自动选择合适的服务器处理请求。</li>
+<li><strong>缓存功能</strong>：Nginx 可以缓存后端服务器返回的响应，提高重复请求的处理效率，减少后端服务器的压力。</li>
+<li><strong>SSL/TLS 加密</strong>：Nginx 可以处理 HTTPS 请求，支持 SSL/TLS 协议，提供安全的网络通信。</li>
+</ol>
+<h1 id="预定义变量"><a class="anchor" href="#预定义变量">#</a> 预定义变量</h1>
+<h2 id="客户端信息"><a class="anchor" href="#客户端信息">#</a> 客户端信息</h2>
+<ul>
+<li>$remote_addr：客户端 IP 地址。</li>
+<li>$remote_port：客户端端口号。</li>
+<li>$remote_user：已经认证的客户端用户名（如 HTTP 基本认证）。</li>
+<li>$http_user_agent：客户端的 User-Agent 信息。</li>
+<li>$http_referer：HTTP 请求头中的 Referer 信息。</li>
+</ul>
+<h2 id="请求信息"><a class="anchor" href="#请求信息">#</a> 请求信息</h2>
+<ul>
+<li>$request：请求的完整行（例如 GET /index.html HTTP/1.1）。</li>
+<li>$request_uri：原始请求的 URI，包括请求参数（例如 /index.html?query=1）。</li>
+<li>$uri：请求的 URI，但不包含参数，且可能已被 location 重写。</li>
+<li>$args：请求的参数部分（即？之后的部分）。</li>
+<li>$request_method：请求方法（如 GET、POST）。</li>
+<li>$query_string：请求的查询字符串（与 $args 相同）。</li>
+<li>$http_&lt;header_name&gt;：访问请求头信息。例如，$http_host 用于获取请求头中的 Host 信息。</li>
+</ul>
+<h2 id="响应信息"><a class="anchor" href="#响应信息">#</a> 响应信息</h2>
+<ul>
+<li>$status：响应的 HTTP 状态码。</li>
+<li>$sent_http_&lt;header_name&gt;：自定义响应头的信息。可以通过这种方式在配置中指定和修改响应头。</li>
+</ul>
+<h2 id="服务器信息"><a class="anchor" href="#服务器信息">#</a> 服务器信息</h2>
+<ul>
+<li>$server_addr：服务器地址，Nginx 尝试解析配置的地址，但此变量可能影响性能。</li>
+<li>$server_name：处理请求的服务器名称。</li>
+<li>$server_port：请求到达的服务器端口。</li>
+</ul>
+<h2 id="连接信息"><a class="anchor" href="#连接信息">#</a> 连接信息</h2>
+<ul>
+<li>$connection：当前连接的序列号。</li>
+<li>$connection_requests：当前连接已经处理的请求数量。</li>
+</ul>
+<h2 id="文件路径"><a class="anchor" href="#文件路径">#</a> 文件路径</h2>
+<ul>
+<li>$document_root：当前请求的 root 路径（文件系统中的路径）。</li>
+<li>$realpath_root：当前请求的真实路径，即解析符号链接后的路径。</li>
+<li>$request_filename：当前请求的完整文件路径。</li>
+</ul>
+<h2 id="其他"><a class="anchor" href="#其他">#</a> 其他</h2>
+<ul>
+<li>$hostname：Nginx 服务器的主机名。</li>
+<li>$binary_remote_addr：客户端 IP 的二进制表示（用于哈希计算）。</li>
+<li>$time_local：请求的本地时间。</li>
+<li>$msec：当前时间的 Unix 时间戳（毫秒级）。</li>
+<li>$scheme：请求使用的协议（如 http 或 https）。</li>
+</ul>
+<h1 id="配置项"><a class="anchor" href="#配置项">#</a> 配置项</h1>
+<h2 id="全局配置"><a class="anchor" href="#全局配置">#</a> 全局配置</h2>
+<p>这些配置位于 nginx.conf 文件的最外层，影响整个 Nginx 的行为。</p>
+<h3 id="worker_processes"><a class="anchor" href="#worker_processes">#</a> worker_processes</h3>
+<ul>
+<li>定义：Nginx 启动的工作进程数，一般设置为服务器的 CPU 核心数，或者使用 auto 让 Nginx 自动优化。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>worker processes auto<span class="token punctuation">;</span></pre></td></tr></table></figure><h3 id="error_log"><a class="anchor" href="#error_log">#</a> error_log</h3>
+<ul>
+<li>定义：指定错误日志文件和日志级别。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>error_log /var/log/nginx/error.log warn<span class="token punctuation">;</span></pre></td></tr></table></figure><h3 id="pid"><a class="anchor" href="#pid">#</a> pid</h3>
+<ul>
+<li>定义：指定保存 Nginx 进程 ID 的文件路径。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>pid /var/run/nginx.pid<span class="token punctuation">;</span></pre></td></tr></table></figure><h2 id="events-模块配置"><a class="anchor" href="#events-模块配置">#</a> events 模块配置</h2>
+<h3 id="worker_connections"><a class="anchor" href="#worker_connections">#</a> worker_connections</h3>
+<ul>
+<li>定义：每个工作进程允许的最大连接数。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>events <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    worker_connections <span class="token number">1024</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    multi_accept: on<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h3 id="multi_accept"><a class="anchor" href="#multi_accept">#</a> multi_accept</h3>
+<ul>
+<li>定义：当设置为 on 时，每个工作进程会一次性接受尽可能多的连接，这可以提高请求处理效率。默认为 off。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>events <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    worker_connections <span class="token number">1024</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    multi_accept: on<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h3 id="use"><a class="anchor" href="#use">#</a> use</h3>
+<ul>
+<li>定义：用于指定事件模型（如 epoll、kqueue、select 等），Nginx 会根据操作系统自动选择最优的事件模型。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>events <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    use: epoll<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h3 id="accept_mutex"><a class="anchor" href="#accept_mutex">#</a> accept_mutex</h3>
+<ul>
+<li>定义：用于启用 “接受互斥锁”，防止多个工作进程同时接受请求，避免竞争，提升负载均衡。默认值为 on。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>events <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    accept_mutex: on<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h3 id="worker_aio_requests"><a class="anchor" href="#worker_aio_requests">#</a> worker_aio_requests</h3>
+<ul>
+<li>定义：用于设置异步 I/O 的最大请求数（主要用于文件操作）。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>events <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    worker_aio_requests <span class="token number">1024</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h2 id="http-模块配置"><a class="anchor" href="#http-模块配置">#</a> http 模块配置</h2>
+<p>http 模块是处理 HTTP 请求的核心模块，定义了如何处理客户端请求。</p>
+<h3 id="server"><a class="anchor" href="#server">#</a> server</h3>
+<ul>
+<li>定义：定义一个虚拟主机块。一个 Nginx 实例可以有多个 server 块，每个块定义一个虚拟主机。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>server <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    listen <span class="token number">80</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    server_name example.com<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>    root /var/www/html<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h3 id="location"><a class="anchor" href="#location">#</a> location</h3>
+<ul>
+<li>定义：匹配 URL 路径的处理规则。不同的路径可以有不同的处理方式。比如代理、文件服务等。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location / <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    try_files <span class="token variable">$uri</span> <span class="token variable">$uri</span>/ <span class="token operator">=</span><span class="token number">404</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><blockquote>
+<p><code>try_files</code>  会尝试按照指定的顺序检查文件是否存在，并返回找到的第一个文件。如果所有指定的文件都不存在， <code>try_files</code>  可以将请求重定向到另一个 URI 或返回一个指定的 HTTP 状态码。</p>
+<p>在这个例子中，当请求匹配到 <code>/</code>  时，Nginx 会首先尝试直接返回请求的 URI 对应的文件（即 <code>$uri</code> ）。如果该文件不存在，Nginx 会尝试将请求作为目录处理，即在该目录下找到默认的索引文件（一般为 <code>index.html</code> ）。如果目录也不存在或没有默认索引文件，Nginx 最终会返回 404 状态码。</p>
+</blockquote>
+<h3 id="listen"><a class="anchor" href="#listen">#</a> listen</h3>
+<ul>
+<li>定义：指定虚拟主机监听的端口，通常是 80（HTTP）或者 443（HTTPS）。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>listen <span class="token number">80</span><span class="token punctuation">;</span></pre></td></tr></table></figure><h3 id="server_name"><a class="anchor" href="#server_name">#</a> server_name</h3>
+<ul>
+<li>定义：指定虚拟主机的域名，支持通配符匹配。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>server_name example.com www.example.com<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token comment"># server_name  *.example.com;</span></pre></td></tr></table></figure><h3 id="rootalias"><a class="anchor" href="#rootalias">#</a> root/alias</h3>
+<ul>
+<li>定义：root 设置根目录路径，alias 设置路径别名。<strong>alias 在匹配 location 时不会追加匹配的路径，而 root 会追加匹配路径</strong>。</li>
+</ul>
+<div class="note success">
+<p>root 指令允许你指定 Nginx 在文件系统中的哪个目录开始查找和返回请求的文件。这是处理静态文件（如 HTML、CSS、JavaScript、图片等）和可能的服务端脚本或程序的基础。</p>
+<p>alias 指令用于映射请求的 URI 到一个确切的文件系统路径。它不会将请求的 URI 与指定路径拼接，而是直接替换掉 URI 中的部分或全部，以定位到具体的文件。</p>
+</div>
+<ul>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location /static/ <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    root /var/www/html<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><div class="note info">
+<p>在这个配置中，如果 Nginx 接收到一个对 <code>http://example.com/static/images/logo.png</code>  的请求，它会将 <code>/static/images/logo.png</code>  拼接到 <code>/var/www/html</code>  后面，形成 <code>/var/www/html/images/logo.png</code>  的完整文件路径，然后去尝试找到并返回该文件。</p>
+</div>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location /some/path/ <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    <span class="token builtin class-name">alias</span> /path/to/actual/directory/<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><div class="note info">
+<p>在这个例子中，当请求以 <code>/some/path/</code>  开头时，Nginx 会将 <code>/some/path/</code>  部分替换为 <code>/path/to/actual/directory/</code> ，并在新的路径下查找资源。重要的是要注意 <code>alias</code>  路径末尾的斜杠，它会影响 Nginx 如何处理剩余的 URI 部分。</p>
+</div>
+<p><strong>alias 路径处理</strong>：</p>
+<ul>
+<li>如果 <code>location</code>  块中的 URI 以斜杠结尾（如 <code>/some/path/</code> ），则 Nginx 会在 <code>alias</code>  指定的路径后直接添加请求的剩余 URI 部分（不包括 <code>location</code>  块中指定的 URI 部分）来查找文件。</li>
+<li>如果 <code>location</code>  块中的 URI 不以斜杠结尾（如 <code>/some/file</code> ），则 Nginx 会将请求的最后一个部分（即最后一个 <code>/</code>  之后的部分）作为文件名，并在 <code>alias</code>  指定的路径下查找这个文件。</li>
+</ul>
+<h3 id="index"><a class="anchor" href="#index">#</a> index</h3>
+<ul>
+<li>定义：指定当访问目录时，默认加载的文件。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>index index.html index.htm<span class="token punctuation">;</span></pre></td></tr></table></figure><h3 id="gzip"><a class="anchor" href="#gzip">#</a> gzip</h3>
+<ul>
+<li>定义：启用 gzip 压缩以提高传输效率</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token function">gzip</span> on<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>gzip_types text/plain application/javascript text/css<span class="token punctuation">;</span></pre></td></tr></table></figure><h3 id="client_max_body_size"><a class="anchor" href="#client_max_body_size">#</a> client_max_body_size</h3>
+<ul>
+<li>定义：设置客户端请求的最大允许大小，常用于限制上传文件的大小。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>client_max_body_size 50M<span class="token punctuation">;</span></pre></td></tr></table></figure><h2 id="反向代理配置"><a class="anchor" href="#反向代理配置">#</a> 反向代理配置</h2>
+<p>Nginx 常被用于反向代理，通过它可以将请求转发到后端服务器。</p>
+<h3 id="proxy_pass"><a class="anchor" href="#proxy_pass">#</a> proxy_pass</h3>
+<ul>
+<li>定义：转发请求到后端服务器。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location /api/ <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    proxy_pass http://localhost:3000/<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h3 id="proxy_set_header"><a class="anchor" href="#proxy_set_header">#</a> proxy_set_header</h3>
+<ul>
+<li>定义：在转发请求时，设置额外的 HTTP 请求头。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location /api/ <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    proxy_pass http://localhost:3000/<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    proxy_set_header Host <span class="token variable">$host</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>    proxy_set_header X-Real-IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="5"></td><td><pre>    proxy_set_header X-Forwarded-For <span class="token variable">$proxy_add_x_forwarded_for</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h3 id="proxy_redirect"><a class="anchor" href="#proxy_redirect">#</a> proxy_redirect</h3>
+<ul>
+<li>定义：修改后端服务器返回的 Location 和 Refresh HTTP 响应头字段。这在你使用 Nginx 作为反向代理时特别有用，因为后端服务器返回的响应可能会包含指向其自身的 URL，而不是你希望客户端访问的公共 URL（即 Nginx 代理的 URL）。</li>
+</ul>
+<blockquote>
+<p>关于 Location 和 Refresh 的更多内容，可以看：<a target="_blank" rel="noopener" href="https://ku.baidu-int.com/knowledge/HFVrC7hq1Q/pKzJfZczuc/qatPY3vdC4/z_VUiLtV8ph3n8#anchor-c9525650-91fb-11ef-b72b-bb6e2e0ad49c">请求头和响应头</a></p>
+</blockquote>
+<ul>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>proxy_redirect http://backend.example.com/ http://example.com/<span class="token punctuation">;</span></pre></td></tr></table></figure><h2 id="负载均衡配置"><a class="anchor" href="#负载均衡配置">#</a> 负载均衡配置</h2>
+<p>Nginx 支持将请求分发到多个后端服务器，实现负载均衡。</p>
+<h3 id="upstream"><a class="anchor" href="#upstream">#</a> upstream</h3>
+<ul>
+<li>定义：定义后端服务器组。</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>upstream name <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    server address <span class="token punctuation">[</span>parameters<span class="token punctuation">]</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    server address <span class="token punctuation">[</span>parameters<span class="token punctuation">]</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>   <span class="token punctuation">..</span>.</pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><ul>
+<li>说明：
+<ul>
+<li><code>name</code> ：上游服务器组的名称，可以在 <code>proxy_pass</code>  指令中引用。</li>
+<li><code>address</code> ：上游服务器的地址，可以是 IP 地址和端口号，也可以是域名。</li>
+<li><code>parameters</code> ：可选参数，用于配置服务器的权重、最大失败次数、超时时间等。</li>
+</ul>
+</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>http <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    upstream myapp <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>        server <span class="token number">192.168</span>.1.100:8080 <span class="token assign-left variable">weight</span><span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>        server <span class="token number">192.168</span>.1.101:8080<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="5"></td><td><pre>        server <span class="token number">192.168</span>.1.102:8080 backup<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="7"></td><td><pre></pre></td></tr><tr><td data-num="8"></td><td><pre>    server <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="9"></td><td><pre>        listen <span class="token number">80</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="10"></td><td><pre>        server_name example.com<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="11"></td><td><pre></pre></td></tr><tr><td data-num="12"></td><td><pre>        location / <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="13"></td><td><pre>            proxy_pass http://myapp<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="14"></td><td><pre>            proxy_set_header Host <span class="token variable">$host</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="15"></td><td><pre>            proxy_set_header X-Real-IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="16"></td><td><pre>        <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="17"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="18"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h3 id="复杂均衡策略"><a class="anchor" href="#复杂均衡策略">#</a> 复杂均衡策略</h3>
+<ul>
+<li>策略：轮询（默认），将请求依次分配给后端服务器。</li>
+<li><code>parameters</code>  常用属性：
+<ul>
+<li><code>weight</code> ：设置服务器的权重，默认为 1。权重越高，分配到的请求越多。</li>
+<li><code>max_fails</code> ：在指定的时间内，连接失败的最大次数。当超过这个次数时，Nginx 会认为该服务器不可用，并在一段时间内不再将请求转发到该服务器。</li>
+<li><code>fail_timeout</code> ：设置服务器不可用的时间。在这段时间内，Nginx 不会将请求转发到该服务器。一般与 <code>max_fails</code>  配合使用。</li>
+<li><code>backup</code> ：标记该服务器为备用服务器。当其他非备用服务器都不可用时，才会将请求转发到备用服务器。</li>
+<li><code>ip_hash</code> ：根据客户端的 IP 地址进行哈希计算，将同一客户端的请求始终转发到同一台上游服务器。这样可以保证同一客户端的会话保持在同一台服务器上。</li>
+<li><code>least_conn</code> ：将请求转发到连接数最少的上游服务器，实现基于最少连接数的负载均衡。</li>
+</ul>
+</li>
+</ul>
+<h2 id="缓存策略"><a class="anchor" href="#缓存策略">#</a> 缓存策略</h2>
+<p>Nginx 支持配置代理缓存，用于缓存后端服务器的响应。</p>
+<h3 id="proxy_cache_path"><a class="anchor" href="#proxy_cache_path">#</a> proxy_cache_path</h3>
+<ul>
+<li>定义：定义缓存路径和相关参数。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>proxy_cache_path /data/nginx/cache <span class="token assign-left variable">levels</span><span class="token operator">=</span><span class="token number">1</span>:2 <span class="token assign-left variable">keys_zone</span><span class="token operator">=</span>my_cache:10m <span class="token assign-left variable">max_size</span><span class="token operator">=</span>1g <span class="token assign-left variable">inactive</span><span class="token operator">=</span>60m <span class="token assign-left variable">use_temp_path</span><span class="token operator">=</span>off<span class="token punctuation">;</span></pre></td></tr></table></figure><ul>
+<li>说明：
+<ul>
+<li><code>/data/nginx/cache</code> ：设置缓存的存储路径为 <code>/data/nginx/cache</code> 。所有被缓存的响应内容将存储在这个目录下。</li>
+<li><code>levels=1:2</code> ：定义缓存的目录层级结构。这里表示使用两级目录结构。例如，可能会生成类似于 <code>/data/nginx/cache/a/b</code>  的目录路径，其中 <code>a</code>  和 <code>b</code>  是根据缓存键动态生成的目录名称。</li>
+<li><code>keys_zone=my_cache:10m</code> ：创建一个名为  <code>my_cache</code>  的缓存区，大小为 10MB。这个缓存区用于存储缓存的元数据，如缓存键、缓存的过期时间等信息。</li>
+<li><code>max_size=1g</code> ：设置整个缓存的最大尺寸为 1GB。当缓存的总大小超过这个限制时，Nginx 会根据缓存的策略（如  <code>inactive</code>  参数定义的策略）来清理一些缓存内容，以保持缓存的总大小在这个限制之内。</li>
+<li><code>inactive=60m</code> ：如果一个缓存项在 60 分钟内没有被访问，那么它将被视为不活跃，并可能被清理。</li>
+<li><code>use_temp_path=off</code> ：关闭临时路径的使用。通常，Nginx 在缓存文件时可能会先将文件存储在临时路径中，然后再移动到最终的缓存路径。设置这个参数为  <code>off</code>  可以避免使用临时路径，直接将缓存文件存储到指定的缓存路径中，提高缓存的效率。</li>
+</ul>
+</li>
+</ul>
+<h3 id="proxy_cache"><a class="anchor" href="#proxy_cache">#</a> <strong>proxy_cache</strong></h3>
+<ul>
+<li>定义：启用缓存，制定缓存区。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location / <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    proxy_cache my_cache<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    proxy_pass http://backend<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h2 id="ssl-配置"><a class="anchor" href="#ssl-配置">#</a> SSL 配置</h2>
+<p>Nginx 支持 HTTPS，配置 SSL 可以提升安全性。</p>
+<h3 id="ssl_certificate-ssl_certificate_key"><a class="anchor" href="#ssl_certificate-ssl_certificate_key">#</a> ssl_certificate / ssl_certificate_key</h3>
+<ul>
+<li>定义：指定 SSL 证书和秘钥。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>server <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    listen <span class="token number">443</span> ssl<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    ssl_certificate /etc/nginx/ssl/nginx.crt<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>    ssl_certificate_key /etc/nginx/ssl/nginx.key<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h3 id="ssl_protocols"><a class="anchor" href="#ssl_protocols">#</a> ssl_protocols</h3>
+<ul>
+<li>定义：指定支持的 SSL/TLS 协议。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>ssl_protocols TLSv1.2 TLSv1.3<span class="token punctuation">;</span></pre></td></tr></table></figure><h2 id="日志相关配置"><a class="anchor" href="#日志相关配置">#</a> 日志相关配置</h2>
+<h3 id="access_log"><a class="anchor" href="#access_log">#</a> access_log</h3>
+<ul>
+<li>定义：指定访问日志文件路径和格式。</li>
+<li>用法：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment"># log_format 用于定义日志格式</span></pre></td></tr><tr><td data-num="2"></td><td><pre>log_format myFormat '<span class="token variable">$remote_addr</span>–<span class="token variable">$remote_user</span> <span class="token punctuation">[</span><span class="token variable">$time_local</span><span class="token punctuation">]</span> <span class="token variable">$request</span> <span class="token variable">$status</span> <span class="token variable">$body_bytes_sent</span> <span class="token variable">$http_referer</span></pre></td></tr><tr><td data-num="3"></td><td><pre>access_log /var/log/nginx/access.log myFormat<span class="token punctuation">;</span></pre></td></tr></table></figure><h2 id="示例"><a class="anchor" href="#示例">#</a> 示例</h2>
+<p>来源：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7267003603095879714?searchId=20241025142744CB011EB89DC1C375C2DA">稀土掘金</a></p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token comment"># 全局段配置</span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token comment"># ------------------------------</span></pre></td></tr><tr><td data-num="3"></td><td><pre></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token comment"># 指定运行 nginx 的用户或用户组，默认为 nobody。</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token comment">#user administrator administrators;</span></pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token comment"># 设置工作进程数，通常设置为等于 CPU 核心数。</span></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token comment">#worker_processes 2;</span></pre></td></tr><tr><td data-num="9"></td><td><pre></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token comment"># 指定 nginx 进程的 PID 文件存放位置。</span></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token comment">#pid /nginx/pid/nginx.pid;</span></pre></td></tr><tr><td data-num="12"></td><td><pre></pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token comment"># 指定错误日志的存放路径和日志级别。</span></pre></td></tr><tr><td data-num="14"></td><td><pre>error_log log/error.log debug<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="15"></td><td><pre></pre></td></tr><tr><td data-num="16"></td><td><pre><span class="token comment"># events 段配置信息</span></pre></td></tr><tr><td data-num="17"></td><td><pre><span class="token comment"># ------------------------------</span></pre></td></tr><tr><td data-num="18"></td><td><pre>events <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="19"></td><td><pre>    <span class="token comment"># 设置网络连接序列化，用于防止多个进程同时接受到新连接的情况，这种情况称为 "惊群"。</span></pre></td></tr><tr><td data-num="20"></td><td><pre>    accept_mutex on<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="21"></td><td><pre></pre></td></tr><tr><td data-num="22"></td><td><pre>    <span class="token comment"># 设置一个进程是否可以同时接受多个新连接。</span></pre></td></tr><tr><td data-num="23"></td><td><pre>    multi_accept on<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="24"></td><td><pre></pre></td></tr><tr><td data-num="25"></td><td><pre>    <span class="token comment"># 设置工作进程的最大连接数。</span></pre></td></tr><tr><td data-num="26"></td><td><pre>    worker_connections  <span class="token number">1024</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="27"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="28"></td><td><pre></pre></td></tr><tr><td data-num="29"></td><td><pre><span class="token comment"># http 配置段，用于配置 HTTP 服务器的参数。</span></pre></td></tr><tr><td data-num="30"></td><td><pre><span class="token comment"># ------------------------------</span></pre></td></tr><tr><td data-num="31"></td><td><pre>http <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="32"></td><td><pre>    <span class="token comment"># 包含文件扩展名与 MIME 类型的映射。</span></pre></td></tr><tr><td data-num="33"></td><td><pre>    include       mime.types<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="34"></td><td><pre></pre></td></tr><tr><td data-num="35"></td><td><pre>    <span class="token comment"># 设置默认的 MIME 类型。</span></pre></td></tr><tr><td data-num="36"></td><td><pre>    default_type  application/octet-stream<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="37"></td><td><pre></pre></td></tr><tr><td data-num="38"></td><td><pre>    <span class="token comment"># 定义日志格式。</span></pre></td></tr><tr><td data-num="39"></td><td><pre>    log_format myFormat <span class="token string">'$remote_addr–$remote_user [$time_local] $request $status $body_bytes_sent $http_referer $http_user_agent $http_x_forwarded_for'</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="40"></td><td><pre></pre></td></tr><tr><td data-num="41"></td><td><pre>    <span class="token comment"># 指定访问日志的存放路径和使用的格式。</span></pre></td></tr><tr><td data-num="42"></td><td><pre>    access_log log/access.log myFormat<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="43"></td><td><pre></pre></td></tr><tr><td data-num="44"></td><td><pre>    <span class="token comment"># 允许使用 sendfile 方式传输文件。</span></pre></td></tr><tr><td data-num="45"></td><td><pre>    sendfile on<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="46"></td><td><pre></pre></td></tr><tr><td data-num="47"></td><td><pre>    <span class="token comment"># 限制每次调用 sendfile 传输的数据量。</span></pre></td></tr><tr><td data-num="48"></td><td><pre>    sendfile_max_chunk 100k<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="49"></td><td><pre></pre></td></tr><tr><td data-num="50"></td><td><pre>    <span class="token comment"># 设置连接的保持时间。</span></pre></td></tr><tr><td data-num="51"></td><td><pre>    keepalive_timeout <span class="token number">65</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="52"></td><td><pre></pre></td></tr><tr><td data-num="53"></td><td><pre>    <span class="token comment"># 定义一个上游服务器组。</span></pre></td></tr><tr><td data-num="54"></td><td><pre>    upstream mysvr <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="55"></td><td><pre>      server <span class="token number">127.0</span>.0.1:7878<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="56"></td><td><pre>      server <span class="token number">192.168</span>.10.121:3333 backup<span class="token punctuation">;</span>  <span class="token comment">#此服务器为备份服务器。</span></pre></td></tr><tr><td data-num="57"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="58"></td><td><pre></pre></td></tr><tr><td data-num="59"></td><td><pre>    <span class="token comment"># 定义错误页面的重定向地址。</span></pre></td></tr><tr><td data-num="60"></td><td><pre>    error_page <span class="token number">404</span> https://www.baidu.com<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="61"></td><td><pre></pre></td></tr><tr><td data-num="62"></td><td><pre>    <span class="token comment"># 定义一个虚拟主机。</span></pre></td></tr><tr><td data-num="63"></td><td><pre>    server <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="64"></td><td><pre>        <span class="token comment"># 设置单个连接上的最大请求次数。</span></pre></td></tr><tr><td data-num="65"></td><td><pre>        keepalive_requests <span class="token number">120</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="66"></td><td><pre></pre></td></tr><tr><td data-num="67"></td><td><pre>        <span class="token comment"># 设置监听的端口和地址。</span></pre></td></tr><tr><td data-num="68"></td><td><pre>        listen       <span class="token number">4545</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="69"></td><td><pre>        server_name  <span class="token number">127.0</span>.0.1<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="70"></td><td><pre></pre></td></tr><tr><td data-num="71"></td><td><pre>        <span class="token comment"># 定义 location 块，用于匹配特定的请求 URI。</span></pre></td></tr><tr><td data-num="72"></td><td><pre>        location  ~*^.+$ <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="73"></td><td><pre>           <span class="token comment"># 设置请求的根目录。</span></pre></td></tr><tr><td data-num="74"></td><td><pre>           <span class="token comment">#root path;</span></pre></td></tr><tr><td data-num="75"></td><td><pre></pre></td></tr><tr><td data-num="76"></td><td><pre>           <span class="token comment"># 设置默认页面。</span></pre></td></tr><tr><td data-num="77"></td><td><pre>           <span class="token comment">#index vv.txt;</span></pre></td></tr><tr><td data-num="78"></td><td><pre></pre></td></tr><tr><td data-num="79"></td><td><pre>           <span class="token comment"># 将请求转发到上游服务器组。</span></pre></td></tr><tr><td data-num="80"></td><td><pre>           proxy_pass  http://mysvr<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="81"></td><td><pre></pre></td></tr><tr><td data-num="82"></td><td><pre>           <span class="token comment"># 定义访问控制规则。</span></pre></td></tr><tr><td data-num="83"></td><td><pre>           deny <span class="token number">127.0</span>.0.1<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="84"></td><td><pre>           allow <span class="token number">172.18</span>.5.54<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="85"></td><td><pre>        <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="86"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="87"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><p>一些说明：</p>
+<h3 id="sendfile"><a class="anchor" href="#sendfile">#</a> sendfile</h3>
+<ul>
+<li>定义： <code>sendfile</code>  是一种高效的文件传输方式，用于在操作系统层面直接将文件内容从磁盘传输到网络接口，绕过用户空间。它主要用于提高数据传输性能，特别是在处理大文件的场景下。</li>
+<li>工作原理：
+<ul>
+<li>传统的文件传输过程通常需要以下步骤：
+<ul>
+<li>将文件从磁盘读取到内核空间。</li>
+<li>将内核空间的数据拷贝到用户空间。</li>
+<li>用户空间将数据发送到网络接口。</li>
+</ul>
+</li>
+<li><code>sendfile</code>  函数的作用是在<strong>内核空间</strong>中直接完成文件到网络套接字的传输，避免了数据从内核空间到用户空间的多次拷贝，从而减少了上下文切换和系统开销。整个过程简化为：直接将文件数据从内核空间传输到网络接口，无需经过用户空间。</li>
+</ul>
+</li>
+</ul>
+<h3 id="location-路径映射详解"><a class="anchor" href="#location-路径映射详解">#</a> location 路径映射详解</h3>
+<div class="note warning">
+<p>以下格式用法在 nginx 均适用，例如：</p>
+</div>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$request_uri</span> ~ ^/_proxy/<span class="token punctuation">(</span>.*<span class="token punctuation">))</span><span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    <span class="token builtin class-name">set</span> <span class="token variable">$backend_host</span> http://<span class="token variable">$1</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><p>如果请求的 URI 匹配 <code>^/_proxy/(.*)</code>  这个正则表达式，那么就将 $1 设置为变量 <code>$backend_host</code>  的值，</p>
+<ul>
+<li>格式：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location <span class="token punctuation">[</span> <span class="token operator">=</span> <span class="token operator">|</span> ~ <span class="token operator">|</span> ~* <span class="token operator">|</span> <span class="token operator">!</span>~ <span class="token operator">|</span> <span class="token operator">!</span>~* <span class="token operator">|</span> ^~ <span class="token operator">|</span> @ <span class="token punctuation">]</span> uri <span class="token punctuation">&#123;</span><span class="token punctuation">..</span>.<span class="token punctuation">&#125;</span></pre></td></tr></table></figure><ul>
+<li>各标识符解释：
+<ul>
+<li><code>=</code> ：精确匹配。如果匹配成功，立即停止搜索并处理此请求。</li>
+<li><code>~</code> ：执行正则匹配，区分大小写。</li>
+<li><code>~*</code> ：执行正则匹配，不区分大小写。</li>
+<li><code>!~</code> ：正则匹配，区分大小写不匹配。</li>
+<li><code>!~*</code> ：正则匹配，不区分大小写不匹配。</li>
+<li><code>^~</code> ：前缀匹配。如果匹配成功，不再匹配其他 <code>location</code> ，且不查询正则表达式。</li>
+<li><code>@</code> ：指定命名的 <code>location</code> ，主要用于内部重定向请求，如  <code>error_page</code>  和  <code>try_files</code> 。</li>
+<li><code>uri</code> ：待匹配的请求字符串。可以是普通字符串或包含正则表达式。</li>
+</ul>
+</li>
+<li>优先级：优先级顺序：无特定标识 &lt; <code>^~</code> &lt; <code>=</code> &lt; 正则匹配 ( <code>~</code> , <code>~*</code> , <code>!~</code> , <code>!~*</code> )</li>
+<li>示例：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location <span class="token operator">=</span> / <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    <span class="token comment"># 精确匹配 /，主机名后面不能带任何字符串</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    <span class="token comment"># http://abc.com [匹配成功]</span></pre></td></tr><tr><td data-num="4"></td><td><pre>    <span class="token comment"># http://abc.com/index [匹配失败]</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre>location ^~ /img/ <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="8"></td><td><pre>    <span class="token comment"># 以 /img/ 开头的请求，都会匹配上</span></pre></td></tr><tr><td data-num="9"></td><td><pre>    <span class="token comment"># http://abc.com/img/a.jpg [匹配成功]</span></pre></td></tr><tr><td data-num="10"></td><td><pre>    <span class="token comment"># http://abc.com/img/b.mp4 [匹配成功]</span></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="12"></td><td><pre></pre></td></tr><tr><td data-num="13"></td><td><pre>location ~* /Example/ <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="14"></td><td><pre>    <span class="token comment"># 忽略 uri 部分的大小写</span></pre></td></tr><tr><td data-num="15"></td><td><pre>    <span class="token comment"># http://abc.com/test/Example/ [匹配成功]</span></pre></td></tr><tr><td data-num="16"></td><td><pre>    <span class="token comment"># http://abc.com/example/ [匹配成功]</span></pre></td></tr><tr><td data-num="17"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="18"></td><td><pre></pre></td></tr><tr><td data-num="19"></td><td><pre>location /documents <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="20"></td><td><pre>    <span class="token comment"># 如果有正则表达式可以匹配，则优先匹配正则表达式</span></pre></td></tr><tr><td data-num="21"></td><td><pre>    <span class="token comment"># http://abc.com/documentsabc [匹配成功]</span></pre></td></tr><tr><td data-num="22"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="23"></td><td><pre></pre></td></tr><tr><td data-num="24"></td><td><pre>location / <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="25"></td><td><pre>    <span class="token comment"># http://abc.com/abc [匹配成功]</span></pre></td></tr><tr><td data-num="26"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><h3 id="动静分离"><a class="anchor" href="#动静分离">#</a> 动静分离</h3>
+<ul>
+<li>概念：动静分离是指将动态内容和静态内容分开处理。静态内容通常包括：图片、CSS、JavaScript、HTML 文件等，这些内容不需要经常更改。而动态内容则是经常变化的，如：PHP、ASP、JSP、Servlet 等生成的内容。</li>
+<li>配置：</li>
+</ul>
+<ol>
+<li>设置根目录</li>
+</ol>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location ~* .<span class="token punctuation">(</span>jpg<span class="token operator">|</span>jpeg<span class="token operator">|</span>png<span class="token operator">|</span>gif<span class="token operator">|</span>ico<span class="token operator">|</span>css<span class="token operator">|</span>js<span class="token punctuation">)</span>$ <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    root /path/to/static/files<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    expires 30d<span class="token punctuation">;</span>  <span class="token comment"># 设置缓存时间</span></pre></td></tr><tr><td data-num="4"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><p>在上述配置中，所有的静态文件都被存放在 <code>/path/to/static/files</code>  目录下。 <code>expires</code>  指令设置了静态文件的缓存时间。</p>
+<ol>
+<li>使用 alias 别名</li>
+</ol>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location /static/ <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    <span class="token builtin class-name">alias</span> /path/to/static/files/<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><p>在这个配置中，URL 中的 <code>/static/</code>  会映射到文件系统的 <code>/path/to/static/files/</code> 。</p>
+<ol>
+<li>代理动态内容</li>
+</ol>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location / <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    proxy_pass http://backend_server_address<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    proxy_set_header Host <span class="token variable">$host</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>    proxy_set_header X-Real-IP <span class="token variable">$remote_addr</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><ul>
+<li>注意事项：
+<ul>
+<li>确保你的静态文件路径配置正确，避免 404 错误。</li>
+<li>使用 <code>expires</code>  指令为静态内容设置缓存，这可以减少服务器的负载并提高页面加载速度。</li>
+<li>动静分离不仅可以提高服务器的响应速度，还可以减少后端服务器的压力，因为静态文件通常由 Nginx 直接处理，而不需要代理到后端服务器。</li>
+</ul>
+</li>
+</ul>
+<h3 id="防盗链"><a class="anchor" href="#防盗链">#</a> 防盗链</h3>
+<p><img loading="lazy" data-src="https://cdn.nlark.com/yuque/0/2024/png/36082988/1733728611151-c7d387a4-3c7e-4d86-a2d8-324fd1667f64.png" alt="" /></p>
+<blockquote>
+<p>防盗链是指防止其他网站直接链接到你的网站资源（如图片、视频等），从而消耗你的服务器带宽。Nginx 提供了一个非常方便的模块 —— <code>ngx_http_referer_module</code> ，用于实现防盗链功能。</p>
+</blockquote>
+<ul>
+<li>基本配置：</li>
+</ul>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>location ~ .*.<span class="token punctuation">(</span>gif<span class="token operator">|</span>jpg<span class="token operator">|</span>jpeg<span class="token operator">|</span>png<span class="token operator">|</span>bmp<span class="token operator">|</span>swf<span class="token punctuation">)</span>$ <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    valid_referers none blocked www.example.com example.com *.example.net<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre></pre></td></tr><tr><td data-num="4"></td><td><pre>    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$invalid_referer</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="5"></td><td><pre>        <span class="token builtin class-name">return</span> <span class="token number">403</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="7"></td><td><pre><span class="token punctuation">&#125;</span></pre></td></tr></table></figure><ul>
+<li>说明：
+<ul>
+<li><code>valid_referers</code>  定义了合法的来源页面。 <code>none</code>  表示直接访问， <code>blocked</code>  表示没有 <code>Referer</code>  头的访问， <code>www.example.com</code>  和 <code>example.com</code>  是合法的来源域名， <code>*.example.net</code>  表示 <code>example.net</code>  的所有子域名都是合法的来源。</li>
+<li><code>$invalid_referer</code>  变量会在来源不在 <code>valid_referers</code>  列表中时变为 &quot;true&quot;。</li>
+<li>如果来源不合法，服务器将返回 403 禁止访问的状态码。</li>
+</ul>
+</li>
+<li>注意事项：
+<ul>
+<li>防盗链配置可能会影响搜索引擎的爬虫，因此在实施防盗链策略时要小心。</li>
+<li>如果你的网站使用了 CDN，确保 CDN 的服务器也在 <code>valid_referers</code>  列表中，否则 CDN 可能无法正常工作。</li>
+<li>为了确保防盗链配置正确，你应该在生产环境之前在测试环境中进行充分的测试。</li>
+</ul>
+</li>
+</ul>
+<div class="tags"><a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="ic i-tag"></i>前端</a><a href="/tags/Nginx/" rel="tag"><i class="ic i-tag"></i>Nginx</a></div></div><footer><div class="meta"><span class="item"><span class="icon"><i class="ic i-calendar-check"></i></span><span class="text">更新于 </span><time title="修改时间：2025-02-14 15:55:16" itemprop="dateModified" datetime="2025-02-14T15:55:16+08:00">2025-02-14</time></span></div><div class="reward"><button><i class="ic i-heartbeat"></i>赞赏</button><p>请我喝[茶]~(￣▽￣)~*</p><div id="qr"><div><img loading="lazy" data-src="/assets/wechatpay.jpg" alt="BaiYe 微信支付"/><p>微信支付</p></div><div><img loading="lazy" data-src="/assets/alipay.jpg" alt="BaiYe 支付宝"/><p>支付宝</p></div></div></div><div id="copyright"><ul><li class="author"><strong>本文作者：</strong>BaiYe<i class="ic i-at"><em>@</em></i>白夜书</li><li class="link"><strong>本文链接：</strong><a href="https://nocturne-tome.cn/computer-science/programming/front-end/Nginx/" title="Nginx">https://nocturne-tome.cn/computer-science/programming/front-end/Nginx/</a></li><li class="license"><strong>版权声明：</strong>本站所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li></ul></div></footer></article></div><div class="post-nav"><div class="item left"><a href="/computer-science/programming/front-end/Module/" rel="prev" itemprop="url" data-background-image="https:&#x2F;&#x2F;gitee.com&#x2F;Delusional_man&#x2F;image&#x2F;raw&#x2F;master&#x2F;img&#x2F;img37.webp" title="Module"><span class="type">上一篇</span><span class="category"><i class="ic i-flag"></i>前端学习</span><h3>Module</h3></a></div><div class="item right"><a href="/computer-science/programming/front-end/devicePixelRatio/" rel="next" itemprop="url" data-background-image="https:&#x2F;&#x2F;gitee.com&#x2F;Delusional_man&#x2F;image&#x2F;raw&#x2F;master&#x2F;img&#x2F;img58.webp" title="devicePixelRatio"><span class="type">下一篇</span><span class="category"><i class="ic i-flag"></i>前端学习</span><h3>devicePixelRatio</h3></a></div></div><div class="wrap" id="comments"></div></div><div id="sidebar"><div class="inner"><div class="panels"><div class="inner"><div class="contents panel pjax" data-title="文章目录"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text"> 定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-number">2.</span> <span class="toc-text"> 主要功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="toc-number">3.</span> <span class="toc-text"> 预定义变量</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E4%BF%A1%E6%81%AF"><span class="toc-number">3.1.</span> <span class="toc-text"> 客户端信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E4%BF%A1%E6%81%AF"><span class="toc-number">3.2.</span> <span class="toc-text"> 请求信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E4%BF%A1%E6%81%AF"><span class="toc-number">3.3.</span> <span class="toc-text"> 响应信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BF%A1%E6%81%AF"><span class="toc-number">3.4.</span> <span class="toc-text"> 服务器信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E4%BF%A1%E6%81%AF"><span class="toc-number">3.5.</span> <span class="toc-text"> 连接信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84"><span class="toc-number">3.6.</span> <span class="toc-text"> 文件路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96"><span class="toc-number">3.7.</span> <span class="toc-text"> 其他</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%A1%B9"><span class="toc-number">4.</span> <span class="toc-text"> 配置项</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE"><span class="toc-number">4.1.</span> <span class="toc-text"> 全局配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#worker_processes"><span class="toc-number">4.1.1.</span> <span class="toc-text"> worker_processes</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#error_log"><span class="toc-number">4.1.2.</span> <span class="toc-text"> error_log</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pid"><span class="toc-number">4.1.3.</span> <span class="toc-text"> pid</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#events-%E6%A8%A1%E5%9D%97%E9%85%8D%E7%BD%AE"><span class="toc-number">4.2.</span> <span class="toc-text"> events 模块配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#worker_connections"><span class="toc-number">4.2.1.</span> <span class="toc-text"> worker_connections</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#multi_accept"><span class="toc-number">4.2.2.</span> <span class="toc-text"> multi_accept</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#use"><span class="toc-number">4.2.3.</span> <span class="toc-text"> use</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#accept_mutex"><span class="toc-number">4.2.4.</span> <span class="toc-text"> accept_mutex</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#worker_aio_requests"><span class="toc-number">4.2.5.</span> <span class="toc-text"> worker_aio_requests</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http-%E6%A8%A1%E5%9D%97%E9%85%8D%E7%BD%AE"><span class="toc-number">4.3.</span> <span class="toc-text"> http 模块配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#server"><span class="toc-number">4.3.1.</span> <span class="toc-text"> server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#location"><span class="toc-number">4.3.2.</span> <span class="toc-text"> location</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#listen"><span class="toc-number">4.3.3.</span> <span class="toc-text"> listen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#server_name"><span class="toc-number">4.3.4.</span> <span class="toc-text"> server_name</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rootalias"><span class="toc-number">4.3.5.</span> <span class="toc-text"> root&#x2F;alias</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#index"><span class="toc-number">4.3.6.</span> <span class="toc-text"> index</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#gzip"><span class="toc-number">4.3.7.</span> <span class="toc-text"> gzip</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#client_max_body_size"><span class="toc-number">4.3.8.</span> <span class="toc-text"> client_max_body_size</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE"><span class="toc-number">4.4.</span> <span class="toc-text"> 反向代理配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#proxy_pass"><span class="toc-number">4.4.1.</span> <span class="toc-text"> proxy_pass</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proxy_set_header"><span class="toc-number">4.4.2.</span> <span class="toc-text"> proxy_set_header</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proxy_redirect"><span class="toc-number">4.4.3.</span> <span class="toc-text"> proxy_redirect</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E9%85%8D%E7%BD%AE"><span class="toc-number">4.5.</span> <span class="toc-text"> 负载均衡配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#upstream"><span class="toc-number">4.5.1.</span> <span class="toc-text"> upstream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5"><span class="toc-number">4.5.2.</span> <span class="toc-text"> 复杂均衡策略</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E7%AD%96%E7%95%A5"><span class="toc-number">4.6.</span> <span class="toc-text"> 缓存策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#proxy_cache_path"><span class="toc-number">4.6.1.</span> <span class="toc-text"> proxy_cache_path</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proxy_cache"><span class="toc-number">4.6.2.</span> <span class="toc-text"> proxy_cache</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssl-%E9%85%8D%E7%BD%AE"><span class="toc-number">4.7.</span> <span class="toc-text"> SSL 配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ssl_certificate-ssl_certificate_key"><span class="toc-number">4.7.1.</span> <span class="toc-text"> ssl_certificate &#x2F; ssl_certificate_key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ssl_protocols"><span class="toc-number">4.7.2.</span> <span class="toc-text"> ssl_protocols</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">4.8.</span> <span class="toc-text"> 日志相关配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#access_log"><span class="toc-number">4.8.1.</span> <span class="toc-text"> access_log</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.9.</span> <span class="toc-text"> 示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#sendfile"><span class="toc-number">4.9.1.</span> <span class="toc-text"> sendfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#location-%E8%B7%AF%E5%BE%84%E6%98%A0%E5%B0%84%E8%AF%A6%E8%A7%A3"><span class="toc-number">4.9.2.</span> <span class="toc-text"> location 路径映射详解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB"><span class="toc-number">4.9.3.</span> <span class="toc-text"> 动静分离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%98%B2%E7%9B%97%E9%93%BE"><span class="toc-number">4.9.4.</span> <span class="toc-text"> 防盗链</span></a></li></ol></li></ol></li></ol></div><div class="related panel pjax" data-title="系列文章"><ul><li ><a href="/computer-science/programming/front-end/WebAssembly/" rel="bookmark" title="WebAssembly">WebAssembly</a></li><li ><a href="/computer-science/programming/front-end/Tree-shaking/" rel="bookmark" title="Tree-shaking">Tree-shaking</a></li><li ><a href="/computer-science/programming/front-end/Float32Array/" rel="bookmark" title="Float32Array">Float32Array</a></li><li ><a href="/computer-science/programming/front-end/%E8%A3%85%E9%A5%B0%E5%99%A8%E8%AF%AD%E6%B3%95/" rel="bookmark" title="装饰器语法">装饰器语法</a></li><li ><a href="/computer-science/programming/front-end/%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/" rel="bookmark" title="依赖注入(DI)">依赖注入(DI)</a></li><li ><a href="/computer-science/programming/front-end/meta/" rel="bookmark" title="meta">meta</a></li><li ><a href="/computer-science/programming/front-end/%E5%85%83%E6%95%B0%E6%8D%AE/" rel="bookmark" title="元数据">元数据</a></li><li ><a href="/computer-science/programming/front-end/%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/" rel="bookmark" title="媒体查询">媒体查询</a></li><li ><a href="/computer-science/programming/front-end/React/" rel="bookmark" title="React">React</a></li><li ><a href="/computer-science/programming/front-end/JS%E4%B8%AD%E7%9A%84%E6%89%93%E5%8D%B0%E6%96%B9%E6%B3%95/" rel="bookmark" title="JS中的打印方法">JS中的打印方法</a></li><li ><a href="/computer-science/programming/front-end/%E9%A2%84%E8%8E%B7%E5%8F%96%E5%92%8C%E9%A2%84%E5%8A%A0%E8%BD%BD/" rel="bookmark" title="预获取和预加载(prefetch&preload)">预获取和预加载(prefetch&preload)</a></li><li ><a href="/computer-science/programming/front-end/Module/" rel="bookmark" title="Module">Module</a></li><li  class="active"><a href="/computer-science/programming/front-end/Nginx/" rel="bookmark" title="Nginx">Nginx</a></li><li ><a href="/computer-science/programming/front-end/devicePixelRatio/" rel="bookmark" title="devicePixelRatio">devicePixelRatio</a></li><li ><a href="/computer-science/programming/front-end/Mobx/" rel="bookmark" title="Mobx">Mobx</a></li><li ><a href="/computer-science/programming/front-end/%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8/" rel="bookmark" title="代理服务器">代理服务器</a></li></ul></div><div class="overview panel" data-title="站点概览"><div class="author" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person"><img class="image" loading="lazy" decoding="async" itemprop="image" alt="BaiYe" src="/assets/avatar.jpg"/><p class="name" itemprop="name">BaiYe</p><div class="description" itemprop="description">来点奇思妙想~!</div></div><nav class="state"><div class="item posts"><a href="/archives/"><span class="count">28</span><span class="name">文章</span></a></div><div class="item categories"><a href="/categories/"><span class="count">12</span><span class="name">分类</span></a></div><div class="item tags"><a href="/tags/"><span class="count">26</span><span class="name">标签</span></a></div></nav><div class="social"><a target="_blank" rel="noopener" href="https://github.com/ExecuteMyExecution" class="item github" title="https:&#x2F;&#x2F;github.com&#x2F;ExecuteMyExecution"><i class="ic i-github"></i></a><a target="_blank" rel="noopener" href="https://gitee.com/Delusional_man" class="item gitee" title="https:&#x2F;&#x2F;gitee.com&#x2F;Delusional_man"><i class="ic i-gitee"></i></a><a target="_blank" rel="noopener" href="https://music.163.com/#/user/home?id=402168162" class="item music" title="https:&#x2F;&#x2F;music.163.com&#x2F;#&#x2F;user&#x2F;home?id&#x3D;402168162"><i class="ic i-cloud-music"></i></a><a href="/nocturnetome@gmail.com" class="item email" title="nocturnetome@gmail.com"><i class="ic i-envelope"></i></a></div><div class="menu"><li class="item"><a href="/" rel="section"><i class="ic i-home"></i>首页</a></li><li class="item dropdown"><a href="#" onclick="return false;"><i class="ic i-user"></i>关于</a><ul class="submenu"><li class="item"><a href="/about/about-site" rel="section"><i class="ic i-star"></i>关于本站</a></li><li class="item"><a href="/about/changelog/" rel="section"><i class="ic i-cloud"></i>更新日志</a></li><li class="item"><a href="/admiration/" rel="section"><i class="ic i-coffee"></i>赞赏博主</a></li></ul></li><li class="item dropdown"><a href="#" onclick="return false;"><i class="ic i-feather"></i>文章</a><ul class="submenu"><li class="item"><a href="/archives/" rel="section"><i class="ic i-list-alt"></i>归档</a></li><li class="item"><a href="/categories/" rel="section"><i class="ic i-th"></i>分类</a></li><li class="item"><a href="/tags/" rel="section"><i class="ic i-tags"></i>标签</a></li></ul></li><li class="item"><a href="/friends/" rel="section"><i class="ic i-heart"></i>友达</a></li></div></div></div></div><ul id="quick"><li class="prev pjax"><a href="/computer-science/programming/front-end/devicePixelRatio/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a></li><li class="up"><i class="ic i-arrow-up"></i></li><li class="down"><i class="ic i-arrow-down"></i></li><li class="next pjax"><a href="/computer-science/programming/front-end/Module/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a></li><li class="percent"></li></ul></div></div><div class="dimmer"></div></div></main><footer id="footer"><div class="inner"><div class="widgets"><div class="rpost pjax"><h2>随机文章</h2><ul><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/JS%E4%B8%AD%E7%9A%84%E6%89%93%E5%8D%B0%E6%96%B9%E6%B3%95/">JS中的打印方法</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/painting/" title="分类于绘画">绘画</a><i class="ic i-angle-right"></i><a href="/categories/painting/pixel-art/" title="分类于像素画">像素画</a><i class="ic i-angle-right"></i><a href="/categories/painting/pixel-art/aseprite/" title="分类于Aseprite学习">Aseprite学习</a></div><span><a href="/painting/pixel-art/aseprite/simple-exercise/">简单练习</a></span></li><li class="item"><div class="breadcrumb"></div><span><a href="/computer-science/PAC/">PAC</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/hexo/" title="分类于Hexo">Hexo</a></div><span><a href="/hexo/Hexo%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E9%81%87%E5%88%B0%E7%9A%84%E7%9A%84%E9%97%AE%E9%A2%98/">Hexo主题使用遇到的的问题</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/game-development/" title="分类于游戏开发">游戏开发</a><i class="ic i-angle-right"></i><a href="/categories/game-development/game-maker/" title="分类于GAME_MAKER">GAME_MAKER</a></div><span><a href="/game-development/game-maker/the-first-game/">第一款游戏</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/%E5%AA%92%E4%BD%93%E6%9F%A5%E8%AF%A2/">媒体查询</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/game-development/" title="分类于游戏开发">游戏开发</a><i class="ic i-angle-right"></i><a href="/categories/game-development/game-maker/" title="分类于GAME_MAKER">GAME_MAKER</a></div><span><a href="/game-development/game-maker/GM-dev-problem-record/">GM开发问题记录</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/Module/">Module</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/meta/">meta</a></span></li><li class="item"><div class="breadcrumb"><a href="/categories/computer-science/" title="分类于计算机科学">计算机科学</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/" title="分类于编程知识">编程知识</a><i class="ic i-angle-right"></i><a href="/categories/computer-science/programming/front-end/" title="分类于前端学习">前端学习</a></div><span><a href="/computer-science/programming/front-end/Tree-shaking/">Tree-shaking</a></span></li></ul></div><div class="rpost pjax"><h2>最新评论</h2></div></div><div class="status"><div class="copyright">&copy; 2024 -<span itemprop="copyrightYear">2025</span><span class="with-love"><i class="ic i-sakura rotate"></i></span><span class="author" itemprop="copyrightHolder">BaiYe @ Nocturne Tome</span></div><div class="count"><span class="post-meta-item-icon"><i class="ic i-chart-area"></i></span><span title="站点总字数">71k 字</span><span class="post-meta-divider"> | </span><span class="post-meta-item-icon"><i class="ic i-coffee"></i></span><span title="站点阅读时长">1:04</span></div><div class="powered-by">基于 <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a> & Theme.<a target="_blank" rel="noopener" href="https://github.com/theme-shoka-x/hexo-theme-shokaX/">ShokaX</a></div></div></div></footer></div><script data-config type="text/javascript">var LOCAL = {
+    ispost: true,
+    path: `computer-science/programming/front-end/Nginx/`,
+    favicon: {
+        show: `（●´3｀●）やれやれだぜ`,
+        hide: `(´Д｀)大変だ！`
+    },
+    search: {
+        placeholder: "文章搜索",
+        empty: "关于 「 ${query} 」，什么也没搜到",
+        stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    nocopy: "false",
+    copyright: `复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。`,
+    copy_tex: false,
+    katex: false,
+    mermaid: false,
+    audio: undefined,
+    fancybox: true,
+    nocopy: false,
+    outime: true,
+    template: `<div class="note warning"><p><span class="label warning">文章时效性提示</span><br>这是一篇发布于 {{publish}} 天前，最后一次更新在 {{updated}} 天前的文章，部分信息可能已经发生改变，请注意甄别。</p></div>`,
+    quiz: {
+        choice: `单选题`,
+        multiple: `多选题`,
+        true_false: `判断题`,
+        essay: `问答题`,
+        gap_fill: `填空题`,
+        mistake: `错题备注`
+    },
+    ignores: [
+        (uri) => uri.includes('#'),
+        (uri) => new RegExp(LOCAL.path + '$').test(uri),
+            []
+    ]
+};
+</script><script src="https://s4.zstatic.net/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha384-k6YtvFUEIuEFBdrLKJ3YAUbBki333tj1CSUisai5Cswsg9wcLNaPzsTHDswp4Az8" crossorigin="anonymous" fetchpriority="high"></script><script src="https://s4.zstatic.net/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha384-ZvpUoO&#x2F;+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn&#x2F;6Z&#x2F;hRTt8+pR6L4N2" crossorigin="anonymous" fetchpriority="high"></script><script src="https://s4.zstatic.net/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha384-Zm+UU4tdcfAm29vg+MTbfu&#x2F;&#x2F;q5B&#x2F;lInMbMCr4T8c9rQFyOv6PlfQYpB5wItcXWe7" crossorigin="anonymous" fetchpriority="high"></script><script src="https://s4.zstatic.net/ajax/libs/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js" integrity="sha384-TOxsBplaL96&#x2F;QDWPIUg+ye3v89qSE3s22XNtJMmCeZEep3cVDmXy1zEfZvVv+y2m" crossorigin="anonymous" fetchpriority="high"></script><script src="/js/siteInit.js?v=0.4.25" type="module" fetchpriority="high" defer></script></body></html>

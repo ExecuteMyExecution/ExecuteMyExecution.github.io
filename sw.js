@@ -1,10 +1,6 @@
 const CACHE_NAME = "nocturne-tome-v1";
-const CACHE_URLS = ["/", "/css/app.css"];
 
-self.addEventListener("install", (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(CACHE_URLS))
-  );
+self.addEventListener("install", () => {
   self.skipWaiting();
 });
 
@@ -22,10 +18,14 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+  const url = new URL(event.request.url);
+  if (url.protocol !== "https:" && url.protocol !== "http:") return;
+  if (event.request.method !== "GET") return;
+
   event.respondWith(
     fetch(event.request)
       .then((response) => {
-        if (response.ok) {
+        if (response.ok && response.type === "basic") {
           const clone = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
         }

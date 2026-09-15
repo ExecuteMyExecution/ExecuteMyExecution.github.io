@@ -3,5 +3,6 @@ Allow: /
 Disallow: /js/
 Disallow: /css/
 Disallow: /fonts/
+Disallow: /admin/
 
 Sitemap: https://nocturne-tome.cn/sitemap.xml

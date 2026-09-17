@@ -12,11 +12,18 @@
   --dim: #8b919b; --accent: #72cecf; --pink: #ffbac3; --danger: #e06c75;
 }
 * { box-sizing: border-box; }
+* { scrollbar-width: thin; scrollbar-color: #3f4550 transparent; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #3f4550; border: 2px solid var(--bg); border-radius: 8px; }
+::-webkit-scrollbar-thumb:hover { background: #515866; }
+::-webkit-scrollbar-corner { background: transparent; }
 body { margin: 0; height: 100vh; display: flex; flex-direction: column;
   font: 14px/1.6 Mulish, -apple-system, "PingFang SC", sans-serif;
   background: var(--bg); color: var(--text); }
 button, input, select, textarea { font: inherit; color: inherit;
   background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 5px 8px; }
+input:focus, select:focus, textarea:focus, #body:focus {
+  outline: none; border-color: var(--accent); }
 button { cursor: pointer; }
 button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 button:disabled { opacity: .45; cursor: not-allowed; }

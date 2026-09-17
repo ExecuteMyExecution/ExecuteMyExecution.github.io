@@ -889,11 +889,12 @@ $('btn-commit').onclick = openChanges
 $('btn-delete').onclick = stageDelete
 $('chg-close').onclick = () => $('dlg-changes').close()
 $('btn-do-commit').onclick = doCommit
-$('btn-preview').onclick = () => {
-  const on = $('preview').classList.toggle('on')
+function setPreview (on) {
+  $('preview').classList.toggle('on', on)
   $('btn-preview').classList.toggle('active', on)
   if (on) renderPreview().catch(e => say('预览失败：' + e.message, 'err'))
 }
+$('btn-preview').onclick = () => setPreview(!$('preview').classList.contains('on'))
 $('btn-upload').onclick = () => {
   if (!$('f-file').value.trim() && !$('f-title').value.trim()) {
     return say('请先填写标题或文件名，图片会存到与文章同名的资源目录中。', 'err')
@@ -935,6 +936,7 @@ window.addEventListener('beforeunload', e => { if (state.dirty) e.preventDefault
 // ---------- 启动 ----------
 loadChanges()
 newPost()
+setPreview(true) // 预览默认打开
 updateAuthUI()
 updateChangeUI()
 if (legacyToken) {

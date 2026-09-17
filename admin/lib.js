@@ -184,8 +184,12 @@ export function previewDoc (bodyHtml = '') {
   return `<!DOCTYPE html><html lang="zh-CN" data-theme="dark"><head><meta charset="utf-8">
 <link rel="stylesheet" href="/css/app.css">
 <style>
+  html { scrollbar-width: thin; scrollbar-color: #3f4550 transparent; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #3f4550; border: 2px solid #1b1d21; border-radius: 8px; }
+  ::-webkit-scrollbar-thumb:hover { background: #515866; }
   html, body { background: #1b1d21; height: auto !important; min-height: 100%; }
-  body { margin: 0; padding: 18px 22px; overflow: hidden auto !important; }
+  body { margin: 0; padding: 12px 14px !important; overflow: hidden auto !important; }
   html, body, .body.md { overflow-anchor: none; }
   .body.md span:not(.katex), .body.md p, .body.md pre, .body.md li, .body.md a {
     content-visibility: visible;

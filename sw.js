@@ -1,4 +1,4 @@
-const CACHE_NAME = "nocturne-tome-v20260917032741";
+const CACHE_NAME = "nocturne-tome-v20260917113316";
 
 self.addEventListener("install", () => {
   self.skipWaiting();

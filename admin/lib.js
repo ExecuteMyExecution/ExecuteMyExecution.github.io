@@ -121,6 +121,22 @@ export function detectConflicts (entries, shaOf) {
 export const isNoOpChange = c =>
   c.action !== 'delete' && c.baseText !== undefined && c.text === c.baseText && !c.movedFrom
 
+// front-matter 语义比较：忽略键顺序，用于判断表单值是否与原文件真的不同。
+export function deepEqual (a, b) {
+  if (a === b) return true
+  if (Array.isArray(a) || Array.isArray(b)) {
+    if (!Array.isArray(a) || !Array.isArray(b) || a.length !== b.length) return false
+    return a.every((v, i) => deepEqual(v, b[i]))
+  }
+  if (a && b && typeof a === 'object' && typeof b === 'object') {
+    const ka = Object.keys(a)
+    const kb = Object.keys(b)
+    if (ka.length !== kb.length) return false
+    return ka.every(k => Object.prototype.hasOwnProperty.call(b, k) && deepEqual(a[k], b[k]))
+  }
+  return false
+}
+
 export const isRelativeSrc = src =>
   !!src && !/^([a-z]+:)?\/\//i.test(src) && !src.startsWith('/') && !src.startsWith('data:') &&
   !src.startsWith('blob:')
@@ -170,6 +186,11 @@ export function previewDoc (bodyHtml = '') {
 <style>
   html, body { background: #1b1d21; height: auto !important; min-height: 100%; }
   body { margin: 0; padding: 18px 22px; overflow: hidden auto !important; }
+  html, body, .body.md { overflow-anchor: none; }
+  .body.md span:not(.katex), .body.md p, .body.md pre, .body.md li, .body.md a {
+    content-visibility: visible;
+    contain-intrinsic-size: none;
+  }
   .body.md img { max-width: 100%; height: auto; }
 </style></head>
 <body class="loaded"><div class="article wrap"><div class="body md">${bodyHtml}</div></div>

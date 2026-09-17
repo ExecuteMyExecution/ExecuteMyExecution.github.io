@@ -2,7 +2,7 @@
 // 攒够一批后用 Git Data API 打成一个 commit，推送即触发站点构建。
 import {
   buildTree, diffLines, collapseDiff, escapeHtml, assetDirOf, isRelativeSrc, previewDoc,
-  detectConflicts, isNoOpChange
+  detectConflicts, isNoOpChange, deepEqual
 } from './lib.js'
 
 // 外部依赖都来自公共 CDN，逐个镜像轮试，避免单一 CDN 不可达就整页失效。
@@ -147,6 +147,17 @@ function joinFM (fm, body) {
   return `---\n${head}\n---\n\n${body.replace(/^\s*\n/, '')}`
 }
 
+// 组合正文：若 front-matter 与原文件语义一致，就沿用文件里原始的 front-matter 文本，
+// 不重新用 yaml.dump 序列化——否则像 categories 的块式/流式风格差异会造成「打开即有 diff」。
+// 只有 front-matter 真的改了才回退到 joinFM 重新生成。
+function composeText (fm, body, baseText) {
+  const m = typeof baseText === 'string' && /^---\r?\n([\s\S]*?)\r?\n---\r?\n?/.exec(baseText)
+  if (m && deepEqual(fm, yaml.load(m[1], YAML_IN) || {})) {
+    return baseText.slice(0, m[0].length) + body
+  }
+  return joinFM(fm, body)
+}
+
 function nowStr () {
   const d = new Date()
   const p = n => String(n).padStart(2, '0')
@@ -206,7 +217,7 @@ function stageCurrent () {
   const prev = state.changes.get(path) || {}
   const change = {
     action: 'upsert',
-    text: joinFM(collectFM(), $('body').value),
+    text: composeText(collectFM(), $('body').value, base ? base.text : prev.baseText),
     title,
     baseSha: base ? base.sha : (prev.baseSha ?? null),
     baseText: prev.baseText !== undefined ? prev.baseText : (base ? base.text : ''),
@@ -577,68 +588,142 @@ function insertAtCursor (text) {
 // 不重载 iframe，因此编辑时滚动位置保持不变。
 let previewTimer = null
 let previewWin = null // 外壳文档就绪后的 contentWindow
-let previewPending = null // 外壳加载期间到来的最新内容
+let previewPending = null // 外壳加载期间到来的最新 { revision, html }
 let resetPreviewTop = false // 切换文章时让预览回到顶部
+let previewRevision = 0 // 丢弃跨过异步操作后已经过期的渲染
+let previewRestoreFrame = 0
 
 function schedulePreview () {
+  const revision = ++previewRevision
   if (!$('preview').classList.contains('on')) return
   clearTimeout(previewTimer)
   previewTimer = setTimeout(() => {
-    renderPreview().catch(e => say('预览失败：' + e.message, 'err'))
+    renderPreview(revision).catch(e => say('预览失败：' + e.message, 'err'))
   }, 350)
 }
 
-async function renderPreview () {
+async function renderPreview (revision = ++previewRevision) {
   const iframe = $('preview')
   if (!iframe.classList.contains('on')) return
   const renderer = await ensureMd()
+  if (revision !== previewRevision || !iframe.classList.contains('on')) return
   const html = await resolveImages(renderer.render($('body').value))
+  if (revision !== previewRevision || !iframe.classList.contains('on')) return
   if (previewWin && previewWin.__ntRender) {
-    // 只替换 .body.md 的 innerHTML，浏览器会自动保留滚动位置——不重载、不跳顶。
-    // 编辑时预览停在原处；只有切换文章时才主动回到顶部。
-    previewWin.__ntRender(html)
-    if (resetPreviewTop) {
-      const box = previewScroller()
-      if (box) box.scrollTop = 0
-      resetPreviewTop = false
-    }
+    applyPreviewHtml(html, revision)
     return
   }
   // 首次：写入外壳，等脚本就绪后渲染最新内容
-  previewPending = html
+  previewPending = { revision, html }
   if (!iframe.dataset.init) {
     iframe.dataset.init = '1'
     iframe.onload = () => {
       previewWin = iframe.contentWindow
-      // 预览侧滚动 → 编辑区跟随
-      previewWin.addEventListener('scroll', () => syncScroll('pv'), { passive: true })
-      if (previewWin.__ntRender) previewWin.__ntRender(previewPending)
+      bindUserScroll(previewWin, previewWin, 'pv')
+      if (previewWin.__ntRender && previewPending) {
+        applyPreviewHtml(previewPending.html, previewPending.revision)
+      }
     }
     iframe.srcdoc = previewDoc('')
   }
 }
 
-// 编辑区与预览按比例双向联动（手动滚动时用）。
-// 用"谁先滚谁在一小段时间内当主导"的时间戳锁来打断反馈回环。
-let scrollLeader = null
-let leaderUntil = 0
-let typingUntil = 0 // 打字期间抑制"编辑区→预览"的按比例联动
 function previewScroller () {
   return previewWin && (previewWin.document.scrollingElement || previewWin.document.documentElement)
 }
-function takeLead (source) {
-  scrollLeader = source
-  leaderUntil = performance.now() + 150
+
+function applyPreviewHtml (html, revision) {
+  if (!previewWin || !previewWin.__ntRender || revision !== previewRevision) return
+  if (previewRestoreFrame) cancelAnimationFrame(previewRestoreFrame)
+  const renderWin = previewWin
+  const box = previewScroller()
+  const oldTop = box ? box.scrollTop : 0
+  const oldMax = box ? Math.max(0, box.scrollHeight - box.clientHeight) : 0
+  const wasAtBottom = oldMax - oldTop <= 2
+  const userScrollRevision = previewUserScrollRevision
+
+  previewWin.__ntRender(html)
+  if (!box) return
+  if (resetPreviewTop) {
+    box.scrollTop = 0
+    resetPreviewTop = false
+  } else {
+    const newMax = Math.max(0, box.scrollHeight - box.clientHeight)
+    box.scrollTop = wasAtBottom ? newMax : Math.min(oldTop, newMax)
+    // 主题使用 content-visibility，离屏内容在恢复滚动位置后可能继续修正高度；
+    // 下一帧再按最终滚动范围校准一次，避免文末从底部回弹。
+    previewRestoreFrame = requestAnimationFrame(() => {
+      previewRestoreFrame = 0
+      if (revision !== previewRevision || previewWin !== renderWin || !box.isConnected ||
+        userScrollRevision !== previewUserScrollRevision) return
+      const settledMax = Math.max(0, box.scrollHeight - box.clientHeight)
+      box.scrollTop = wasAtBottom ? settledMax : Math.min(oldTop, settledMax)
+    })
+  }
+}
+// 只由用户的滚轮或触摸滚动手势触发联动。重渲染、浏览器滚动锚定和
+// 程序设置 scrollTop 产生的 scroll 事件不会再反向拖动另一侧。
+let scrollSyncFrame = 0
+let scrollSyncSource = null
+let previewUserScrollRevision = 0
+const pointerScrollSources = new Set()
+const keyboardScrollSources = new Set()
+const keyboardScrollTimers = new Map()
+const scrollKeys = new Set(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'])
+function scheduleScrollSync (source) {
+  scrollSyncSource = source
+  if (scrollSyncFrame) return
+  scrollSyncFrame = requestAnimationFrame(() => {
+    scrollSyncFrame = 0
+    syncScroll(scrollSyncSource)
+  })
+}
+function bindUserScroll (target, endTarget, source) {
+  const scheduleUserScroll = () => {
+    if (source === 'pv') previewUserScrollRevision++
+    scheduleScrollSync(source)
+  }
+  target.addEventListener('wheel', scheduleUserScroll, { passive: true })
+  target.addEventListener('touchmove', scheduleUserScroll, { passive: true })
+  target.addEventListener('keydown', event => {
+    const previewSpace = source === 'pv' && event.key === ' '
+    if (!event.defaultPrevented && !event.metaKey && !event.ctrlKey && !event.altKey &&
+      (scrollKeys.has(event.key) || previewSpace)) {
+      keyboardScrollSources.add(source)
+      if (source === 'pv') previewUserScrollRevision++
+    }
+  })
+  target.addEventListener('keyup', () => {
+    if (!keyboardScrollSources.delete(source)) return
+    clearTimeout(keyboardScrollTimers.get(source))
+    keyboardScrollTimers.set(source, setTimeout(() => {
+      keyboardScrollTimers.delete(source)
+      scheduleScrollSync(source)
+    }, 120))
+  })
+  target.addEventListener('pointerdown', () => {
+    pointerScrollSources.add(source)
+    if (source === 'pv') previewUserScrollRevision++
+  }, { passive: true })
+  target.addEventListener('scroll', () => {
+    if (pointerScrollSources.has(source) || keyboardScrollSources.has(source)) scheduleScrollSync(source)
+  }, { passive: true })
+  const endPointerScroll = () => {
+    if (!pointerScrollSources.delete(source)) return
+    scheduleScrollSync(source)
+  }
+  endTarget.addEventListener('pointerup', endPointerScroll, { passive: true })
+  endTarget.addEventListener('pointercancel', endPointerScroll, { passive: true })
+  endTarget.addEventListener('blur', () => {
+    pointerScrollSources.delete(source)
+    keyboardScrollSources.delete(source)
+    clearTimeout(keyboardScrollTimers.get(source))
+    keyboardScrollTimers.delete(source)
+  })
 }
 function syncScroll (source) {
   const box = previewScroller()
   if (!box || !$('preview').classList.contains('on')) return
-  // 正在打字时，textarea 会自动滚动以跟随光标；此时不要按比例拖动预览，
-  // 否则会把预览"甩"到一个按比例估算的位置（就是之前"改末行也跳"的根因）。
-  // 预览位置改由重渲染时的光标锚定负责。
-  if (source === 'ed' && performance.now() < typingUntil) return
-  if (scrollLeader && scrollLeader !== source && performance.now() < leaderUntil) return
-  takeLead(source)
   const ed = $('body')
   const [from, to] = source === 'ed' ? [ed, box] : [box, ed]
   const denom = from.scrollHeight - from.clientHeight
@@ -828,10 +913,9 @@ $('file-input').onchange = async e => {
 $('f-dir').onchange = suggestCategories
 $('body').oninput = () => {
   state.dirty = true
-  typingUntil = performance.now() + 700 // 打字窗口内不做按比例联动，交给光标锚定
   schedulePreview()
 }
-$('body').addEventListener('scroll', () => syncScroll('ed'), { passive: true })
+bindUserScroll($('body'), window, 'ed')
 for (const id of ['f-title', 'f-date', 'f-cover', 'f-tags', 'f-cats', 'f-desc', 'f-extra', 'f-file',
   'f-status', 'f-dir']) {
   $(id).oninput = () => { state.dirty = true }
